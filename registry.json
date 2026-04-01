@@ -11,7 +11,11 @@
       "icon": "blocks",
       "tint": "160, 120, 210",
       "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-builderio",
-      "tags": ["cms", "builder.io", "content"]
+      "tags": [
+        "cms",
+        "builder.io",
+        "content"
+      ]
     },
     {
       "id": "wrike",
@@ -22,7 +26,96 @@
       "icon": "check-square",
       "tint": "100, 200, 120",
       "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-wrike",
-      "tags": ["project-management", "wrike", "tasks"]
+      "tags": [
+        "project-management",
+        "wrike",
+        "tasks"
+      ]
+    },
+    {
+      "id": "ga4-gtm",
+      "name": "GA4 & GTM Analytics",
+      "description": "Google Analytics 4 and Tag Manager dashboard with AI-powered tag audits and event tracking",
+      "author": "M8N-MatanDessaur",
+      "version": "1.0.0",
+      "icon": "bar-chart-3",
+      "tint": "66, 133, 244",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-ga4-gtm",
+      "tags": [
+        "analytics",
+        "ga4",
+        "gtm",
+        "google",
+        "marketing"
+      ]
+    },
+    {
+      "id": "dependency-inspector",
+      "name": "Dependency Inspector",
+      "description": "Scan repos for vulnerable, outdated, and unlicensed dependencies with health scoring",
+      "author": "M8N-MatanDessaur",
+      "version": "1.0.0",
+      "icon": "shield-check",
+      "tint": "34, 197, 94",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-dependency-inspector",
+      "tags": [
+        "dependencies",
+        "security",
+        "npm",
+        "audit",
+        "vulnerabilities"
+      ]
+    },
+    {
+      "id": "release-manager",
+      "name": "Release Manager",
+      "description": "Track ADO pipelines, generate release notes from work items and commits, monitor pipeline health",
+      "author": "M8N-MatanDessaur",
+      "version": "1.0.0",
+      "icon": "rocket",
+      "tint": "168, 85, 247",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-release-manager",
+      "tags": [
+        "releases",
+        "pipelines",
+        "ci-cd",
+        "changelog",
+        "azure-devops"
+      ]
+    },
+    {
+      "id": "env-manager",
+      "name": "Environment Manager",
+      "description": "Manage .env files across repos -- compare environments, detect secrets, find missing variables",
+      "author": "M8N-MatanDessaur",
+      "version": "1.0.0",
+      "icon": "file-key",
+      "tint": "245, 158, 11",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-env-manager",
+      "tags": [
+        "env",
+        "secrets",
+        "config",
+        "environment-variables",
+        "security"
+      ]
+    },
+    {
+      "id": "sentry",
+      "name": "Sentry Error Tracker",
+      "description": "Monitor application errors via Sentry -- view issues, stack traces, trends, and create work items from errors",
+      "author": "M8N-MatanDessaur",
+      "version": "1.0.0",
+      "icon": "bug",
+      "tint": "226, 100, 80",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-sentry",
+      "tags": [
+        "sentry",
+        "errors",
+        "monitoring",
+        "bug-tracking",
+        "stack-traces"
+      ]
     }
   ]
 }
