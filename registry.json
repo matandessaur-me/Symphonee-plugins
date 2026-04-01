@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "updated": "2026-04-01",
+  "plugins": [
+    {
+      "id": "builderio",
+      "name": "Builder.io",
+      "description": "Manage Builder.io models, schemas, and content entries with AI-powered actions",
+      "author": "M8N-MatanDessaur",
+      "version": "1.0.0",
+      "icon": "blocks",
+      "tint": "160, 120, 210",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-builderio",
+      "tags": ["cms", "builder.io", "content"]
+    },
+    {
+      "id": "wrike",
+      "name": "Wrike",
+      "description": "Task management, board view, cross-sync with Azure DevOps",
+      "author": "M8N-MatanDessaur",
+      "version": "1.0.0",
+      "icon": "check-square",
+      "tint": "100, 200, 120",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-wrike",
+      "tags": ["project-management", "wrike", "tasks"]
+    }
+  ]
+}
