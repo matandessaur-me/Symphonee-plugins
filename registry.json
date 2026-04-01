@@ -116,39 +116,6 @@
         "bug-tracking",
         "stack-traces"
       ]
-    },
-    {
-      "id": "slack",
-      "name": "Slack Bridge",
-      "description": "Read Slack channels, reply to threads, and post messages without leaving DevOps Pilot",
-      "author": "M8N-MatanDessaur",
-      "version": "1.0.0",
-      "icon": "message-square",
-      "tint": "97, 20, 140",
-      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-slack",
-      "tags": [
-        "slack",
-        "messaging",
-        "chat",
-        "notifications"
-      ]
-    },
-    {
-      "id": "teams",
-      "name": "Teams Bridge",
-      "description": "Read Microsoft Teams channels, reply to threads, and post messages without leaving DevOps Pilot",
-      "author": "M8N-MatanDessaur",
-      "version": "1.0.0",
-      "icon": "message-square",
-      "tint": "75, 75, 200",
-      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-teams",
-      "tags": [
-        "teams",
-        "microsoft",
-        "messaging",
-        "chat",
-        "notifications"
-      ]
     }
   ]
 }
