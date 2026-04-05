@@ -8,6 +8,13 @@
       "summary": "claude: CLI \"claude\" rejected flags [\"--effort\",\"low\",\"--model\",\"haiku\",\"-p\",\"--no-input\"]: error: unknown option '--no-input'.",
       "detail": "Failed args: [\"--effort\",\"low\",\"--model\",\"haiku\",\"-p\",\"--no-input\"]",
       "addedAt": "2026-04-05"
+    },
+    {
+      "category": "cli-flags",
+      "cli": "claude",
+      "summary": "claude: CLI \"claude\" rejected flags [\"--model\",\"haiku\",\"-p\",\"--no-input\"]: error: unknown option '--no-input'. Update HEADLESS_F",
+      "detail": "Failed args: [\"--model\",\"haiku\",\"-p\",\"--no-input\"]",
+      "addedAt": "2026-04-05"
     }
   ]
 }
