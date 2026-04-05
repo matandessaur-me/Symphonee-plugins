@@ -1,5 +1,13 @@
 {
   "version": 1,
-  "updated": "2026-04-03",
-  "learnings": []
+  "updated": "2026-04-05",
+  "learnings": [
+    {
+      "category": "cli-flags",
+      "cli": "claude",
+      "summary": "claude: CLI \"claude\" rejected flags [\"--effort\",\"low\",\"--model\",\"haiku\",\"-p\",\"--no-input\"]: error: unknown option '--no-input'.",
+      "detail": "Failed args: [\"--effort\",\"low\",\"--model\",\"haiku\",\"-p\",\"--no-input\"]",
+      "addedAt": "2026-04-05"
+    }
+  ]
 }
