@@ -22,6 +22,13 @@
       "summary": "When testing two branches side by side with worktrees, dispatch two parallel agents (one per branch) instead of running everything sequentially in one thread. Each agent can set up its worktree, install deps, start its dev server, and run tests independently.",
       "detail": null,
       "addedAt": "2026-04-07"
+    },
+    {
+      "category": "orchestration",
+      "cli": "claude",
+      "summary": "When research or parallel work is needed, ALWAYS use the DevOps Pilot orchestrator (POST /api/orchestrator/spawn) to dispatch worker agents (Gemini, Codex, Grok, etc.) instead of using built-in subagent/Agent tools. The orchestrator is the correct dispatch mechanism; built-in agents bypass it and the user cannot see the work in the orchestrator UI.",
+      "detail": null,
+      "addedAt": "2026-04-07"
     }
   ]
 }
