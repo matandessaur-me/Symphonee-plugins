@@ -36,6 +36,13 @@
       "summary": "Run-Query.ps1 in DevOps Pilot takes -File (path to a .ps1 file), not -Query (WIQL string). It is a script runner, not a WIQL executor. Write WIQL logic into a .ps1 in .ai-workspace first, then pass the path via -File.",
       "detail": "Error: A parameter cannot be found that matches parameter name Query. The script just does & $File after validating the file exists.",
       "addedAt": "2026-04-09"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Before calling an endpoint, verify it exists in the documented API reference. Guessed routes return 404 and waste a round-trip. When a field you want to filter on is not supported as a query parameter, pull what is available and filter the rest in memory.",
+      "detail": null,
+      "addedAt": "2026-04-09"
     }
   ]
 }
