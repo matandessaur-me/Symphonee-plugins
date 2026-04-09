@@ -57,6 +57,13 @@
       "summary": "WIQL does not allow ORDER BY on the Tags field. Queries with ORDER BY [System.Tags] fail with a 400 Bad Request. Order by Id, State, or WorkItemType instead. The error body is often empty, which makes this hard to diagnose.",
       "detail": null,
       "addedAt": "2026-04-09"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "sendTrace and sendException have different signatures. sendTrace is (message, severityLevel=1, properties={}) -- 3 args. sendException is (exceptionType, message, method, properties={}) -- 4 args. Do not use the 4-arg exception shape for sendTrace.",
+      "detail": null,
+      "addedAt": "2026-04-09"
     }
   ]
 }
