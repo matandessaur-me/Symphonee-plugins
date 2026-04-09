@@ -43,6 +43,13 @@
       "summary": "Before calling an endpoint, verify it exists in the documented API reference. Guessed routes return 404 and waste a round-trip. When a field you want to filter on is not supported as a query parameter, pull what is available and filter the rest in memory.",
       "detail": null,
       "addedAt": "2026-04-09"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "When merging an array with existing data read from an API, always normalize the existing value first. If the source uses an unusual separator or raw string, naive concatenation can produce a single mashed-together entry instead of separate ones. Split on the expected delimiter with a regex that tolerates whitespace, then join back with a canonical separator.",
+      "detail": null,
+      "addedAt": "2026-04-09"
     }
   ]
 }
