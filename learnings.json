@@ -50,6 +50,13 @@
       "summary": "When merging an array with existing data read from an API, always normalize the existing value first. If the source uses an unusual separator or raw string, naive concatenation can produce a single mashed-together entry instead of separate ones. Split on the expected delimiter with a regex that tolerates whitespace, then join back with a canonical separator.",
       "detail": null,
       "addedAt": "2026-04-09"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "WIQL does not allow ORDER BY on the Tags field. Queries with ORDER BY [System.Tags] fail with a 400 Bad Request. Order by Id, State, or WorkItemType instead. The error body is often empty, which makes this hard to diagnose.",
+      "detail": null,
+      "addedAt": "2026-04-09"
     }
   ]
 }
