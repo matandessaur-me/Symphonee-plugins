@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-07",
+  "updated": "2026-04-09",
   "learnings": [
     {
       "category": "cli-flags",
@@ -29,6 +29,13 @@
       "summary": "When research or parallel work is needed, ALWAYS use the DevOps Pilot orchestrator (POST /api/orchestrator/spawn) to dispatch worker agents (Gemini, Codex, Grok, etc.) instead of using built-in subagent/Agent tools. The orchestrator is the correct dispatch mechanism; built-in agents bypass it and the user cannot see the work in the orchestrator UI.",
       "detail": null,
       "addedAt": "2026-04-07"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "Run-Query.ps1 in DevOps Pilot takes -File (path to a .ps1 file), not -Query (WIQL string). It is a script runner, not a WIQL executor. Write WIQL logic into a .ps1 in .ai-workspace first, then pass the path via -File.",
+      "detail": "Error: A parameter cannot be found that matches parameter name Query. The script just does & $File after validating the file exists.",
+      "addedAt": "2026-04-09"
     }
   ]
 }
