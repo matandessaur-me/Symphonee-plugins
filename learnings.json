@@ -78,6 +78,13 @@
       "summary": "The SheetJS (xlsx) npm package community edition does NOT preserve styles, colors, or formatting -- even with cellStyles:true. That is a Pro-only feature. Use exceljs instead, which reads and writes xlsx files with full style preservation (fills, fonts, borders, tab colors, merged cells, row heights, column widths). When modifying existing rows, unmerge any merged ranges first before clearing/rewriting cells, otherwise merged cell values bleed into new data.",
       "detail": "Previous learning about shiftRowsDown + cellStyles is wrong -- SheetJS community cannot do it. exceljs is the correct library. Key gotcha: if the original file has merged cells (e.g. A44:F44 for a TOTAL row), you must call ws.unMergeCells(range) BEFORE clearing and rewriting those rows, otherwise the merge persists and corrupts new data written to those cells.",
       "addedAt": "2026-04-10"
+    },
+    {
+      "category": "general",
+      "cli": "claude",
+      "summary": "In markdown, a blank line inside a pipe table breaks the table. All table rows must be contiguous with no empty lines between them. When inserting new rows into an existing markdown table, never leave a blank line between the old last row and the new first row, or the new rows will render as raw pipe-delimited text instead of table cells.",
+      "detail": null,
+      "addedAt": "2026-04-10"
     }
   ]
 }
