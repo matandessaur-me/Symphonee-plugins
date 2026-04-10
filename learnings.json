@@ -92,6 +92,13 @@
       "summary": "When extracting Elementor sections from a page to use as templates, always verify the actual column count and structure rather than relying on design doc descriptions. The design notes may describe an idealized layout (e.g. 3-col [20%,60%,20%]) while the actual implementation uses a different structure (e.g. 1-col 100%). Always inspect the JSON data before coding against it.",
       "detail": null,
       "addedAt": "2026-04-10"
+    },
+    {
+      "category": "general",
+      "cli": "claude",
+      "summary": "Elementor section background_color set via API does not render on the frontend until the CSS cache is regenerated (open in Elementor editor + click Update). For immediate rendering without cache regeneration, use the CSS viewport breakout technique on the HTML widget itself: wrap content in an outer div with width:100vw; position:relative; left:50%; transform:translateX(-50%); background:#color, and cap inner content with max-width:1440px; margin:0 auto. Also clear _elementor_css meta to force cache regeneration on next load.",
+      "detail": null,
+      "addedAt": "2026-04-10"
     }
   ]
 }
