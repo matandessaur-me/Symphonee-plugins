@@ -85,6 +85,13 @@
       "summary": "In markdown, a blank line inside a pipe table breaks the table. All table rows must be contiguous with no empty lines between them. When inserting new rows into an existing markdown table, never leave a blank line between the old last row and the new first row, or the new rows will render as raw pipe-delimited text instead of table cells.",
       "detail": null,
       "addedAt": "2026-04-10"
+    },
+    {
+      "category": "general",
+      "cli": "claude",
+      "summary": "When extracting Elementor sections from a page to use as templates, always verify the actual column count and structure rather than relying on design doc descriptions. The design notes may describe an idealized layout (e.g. 3-col [20%,60%,20%]) while the actual implementation uses a different structure (e.g. 1-col 100%). Always inspect the JSON data before coding against it.",
+      "detail": null,
+      "addedAt": "2026-04-10"
     }
   ]
 }
