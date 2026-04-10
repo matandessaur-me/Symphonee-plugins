@@ -99,6 +99,13 @@
       "summary": "Elementor section background_color set via API does not render on the frontend until the CSS cache is regenerated (open in Elementor editor + click Update). For immediate rendering without cache regeneration, use the CSS viewport breakout technique on the HTML widget itself: wrap content in an outer div with width:100vw; position:relative; left:50%; transform:translateX(-50%); background:#color, and cap inner content with max-width:1440px; margin:0 auto. Also clear _elementor_css meta to force cache regeneration on next load.",
       "detail": null,
       "addedAt": "2026-04-10"
+    },
+    {
+      "category": "general",
+      "cli": "claude",
+      "summary": "When using the CSS 100vw breakout technique (width:100vw; left:50%; transform:translateX(-50%)) inside Elementor HTML widgets, always add: (1) overflow-x:clip on the breakout div to prevent horizontal scrollbar from scrollbar-width mismatch, (2) max-width:100vw as fallback, (3) overflow:hidden on the parent Elementor section via custom_css, (4) zero out all padding on the Elementor column via custom_css (selector > .elementor-element-populated { padding: 0 !important; }). Without these, mobile views get horizontal overflow and inward padding gaps.",
+      "detail": null,
+      "addedAt": "2026-04-10"
     }
   ]
 }
