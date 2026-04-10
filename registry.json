@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-04-03",
+  "updated": "2026-04-10",
   "plugins": [
     {
       "id": "builderio",
@@ -115,6 +115,25 @@
         "monitoring",
         "bug-tracking",
         "stack-traces"
+      ]
+    },
+    {
+      "id": "wordpress",
+      "name": "WordPress",
+      "description": "Manage WordPress sites via the REST API -- create and edit posts, pages, media, categories, comments, users, and SEO metadata (Yoast / RankMath)",
+      "author": "M8N-MatanDessaur",
+      "version": "1.0.0",
+      "icon": "feather",
+      "tint": "33, 117, 155",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-wordpress",
+      "tags": [
+        "wordpress",
+        "cms",
+        "blog",
+        "seo",
+        "yoast",
+        "rankmath",
+        "media"
       ]
     }
   ]
