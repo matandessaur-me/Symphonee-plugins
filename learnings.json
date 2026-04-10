@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-09",
+  "updated": "2026-04-10",
   "learnings": [
     {
       "category": "cli-flags",
@@ -64,6 +64,13 @@
       "summary": "sendTrace and sendException have different signatures. sendTrace is (message, severityLevel=1, properties={}) -- 3 args. sendException is (exceptionType, message, method, properties={}) -- 4 args. Do not use the 4-arg exception shape for sendTrace.",
       "detail": null,
       "addedAt": "2026-04-09"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "The xlsx (SheetJS) library strips all formatting (colors, borders, fonts, column widths, merged cells) when you convert a sheet to an array with sheet_to_json and rebuild with aoa_to_sheet. To preserve styles when modifying an Excel file, manipulate cells in-place on the existing worksheet object: use shiftRowsDown to move cells, then write new cell values directly with writeRow copying style from a reference row. Read with { cellStyles: true } and write with { cellStyles: true }.",
+      "detail": "sheet_to_json -> modify array -> aoa_to_sheet destroys all Excel formatting. Instead: (1) read existing cell addresses, (2) shift rows down from insertion point, (3) write new values into individual cells, copying .s (style) from a nearby reference row. This preserves the original workbook formatting.",
+      "addedAt": "2026-04-10"
     }
   ]
 }
