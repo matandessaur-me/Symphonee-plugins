@@ -71,6 +71,13 @@
       "summary": "The xlsx (SheetJS) library strips all formatting (colors, borders, fonts, column widths, merged cells) when you convert a sheet to an array with sheet_to_json and rebuild with aoa_to_sheet. To preserve styles when modifying an Excel file, manipulate cells in-place on the existing worksheet object: use shiftRowsDown to move cells, then write new cell values directly with writeRow copying style from a reference row. Read with { cellStyles: true } and write with { cellStyles: true }.",
       "detail": "sheet_to_json -> modify array -> aoa_to_sheet destroys all Excel formatting. Instead: (1) read existing cell addresses, (2) shift rows down from insertion point, (3) write new values into individual cells, copying .s (style) from a nearby reference row. This preserves the original workbook formatting.",
       "addedAt": "2026-04-10"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "The SheetJS (xlsx) npm package community edition does NOT preserve styles, colors, or formatting -- even with cellStyles:true. That is a Pro-only feature. Use exceljs instead, which reads and writes xlsx files with full style preservation (fills, fonts, borders, tab colors, merged cells, row heights, column widths). When modifying existing rows, unmerge any merged ranges first before clearing/rewriting cells, otherwise merged cell values bleed into new data.",
+      "detail": "Previous learning about shiftRowsDown + cellStyles is wrong -- SheetJS community cannot do it. exceljs is the correct library. Key gotcha: if the original file has merged cells (e.g. A44:F44 for a TOTAL row), you must call ws.unMergeCells(range) BEFORE clearing and rewriting those rows, otherwise the merge persists and corrupts new data written to those cells.",
+      "addedAt": "2026-04-10"
     }
   ]
 }
