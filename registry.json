@@ -141,7 +141,7 @@
       "name": "Sanity",
       "description": "Manage Sanity.io datasets, document types, and documents with AI-powered actions",
       "author": "M8N-MatanDessaur",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "icon": "database",
       "tint": "242, 77, 52",
       "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-sanity",
