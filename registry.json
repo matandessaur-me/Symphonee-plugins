@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "updated": "2026-04-11",
+  "updated": "2026-04-13",
   "plugins": [
     {
       "id": "builderio",
       "name": "Builder.io",
       "description": "Manage Builder.io models, schemas, and content entries with AI-powered actions",
       "author": "M8N-MatanDessaur",
-      "version": "2.2.0",
+      "version": "2.3.0",
       "icon": "blocks",
       "tint": "160, 120, 210",
       "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-builderio",
