@@ -176,6 +176,13 @@
       "summary": "Builder.io /insights?issue=missing-alt under-reports: default detector only matches alt/altText siblings. Custom field names (imageAltTag, videoAltTag, desktopImageAltTag, featuredImage without alt sibling, etc.) are missed and counts come back as 0 even when hundreds of images lack alt.",
       "detail": "For accurate alt audits on spaces with custom component schemas, fetch /content/MODEL and walk the data tree yourself. Recognize: alt, altText, altTag, imageAlt*, desktopImageAlt*, mobileImageAlt*, videoAlt*, iconAlt*, featuredImageAlt, mediaAlt*. Also handle LocalizedValue objects where each locale key may be a string URL or alt text.",
       "addedAt": "2026-04-13"
+    },
+    {
+      "category": "shell",
+      "cli": null,
+      "summary": "curl -o to a path whose parent dir does not exist fails with exit code 23 and size=0 even though it prints HTTP:200. The HTTP status is returned before write, so it is misleading.",
+      "detail": "On Windows bash, shell cwd can reset between tool calls, landing in a subdir. Any relative path that assumed the project root then fails. Always mkdir -p the target dir in the same bash call as the curl, or use an absolute path. Always check curl exit code, not just the HTTP status from -w.",
+      "addedAt": "2026-04-13"
     }
   ]
 }
