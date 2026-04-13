@@ -155,6 +155,13 @@
       "summary": "Node fs.writeFile can hit EPERM when writing generated files into a dot-prefixed workspace folder.",
       "detail": "If Node cannot write a generated manifest or temporary output into a dot-prefixed workspace folder, emit the data to stdout or write to another verified writable path, then clean up. Do not keep retrying the same path.",
       "addedAt": "2026-04-13"
+    },
+    {
+      "category": "shell",
+      "cli": "node",
+      "summary": "When parsing markdown table rows with node -e, always guard cells.length before indexing. Header separator rows (|---|---|) split into fewer cells than data rows and cause TypeError on cells[N].replace. Skip rows where cells.length is below the expected column count.",
+      "detail": "Encountered TypeError: Cannot read properties of undefined (reading replace) while parsing a markdown table via l.split(|). The offending line was a style-laden STORY row that split unevenly due to embedded HTML. Fix: add `if (cells.length < EXPECTED) continue;` before destructuring, and strip HTML with replace(/<[^>]+>/g, ) before trimming.",
+      "addedAt": "2026-04-13"
     }
   ]
 }
