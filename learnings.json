@@ -148,6 +148,13 @@
       "summary": "curl.exe JSON POSTs from PowerShell can hang or time out when inline body quoting is misescaped.",
       "detail": "For local API writes from PowerShell, prefer Invoke-RestMethod with a hashtable converted by ConvertTo-Json, or write complex JSON to a temp file and post that. Avoid deeply escaped inline curl JSON bodies.",
       "addedAt": "2026-04-13"
+    },
+    {
+      "category": "platform",
+      "cli": null,
+      "summary": "Node fs.writeFile can hit EPERM when writing generated files into a dot-prefixed workspace folder.",
+      "detail": "If Node cannot write a generated manifest or temporary output into a dot-prefixed workspace folder, emit the data to stdout or write to another verified writable path, then clean up. Do not keep retrying the same path.",
+      "addedAt": "2026-04-13"
     }
   ]
 }
