@@ -204,6 +204,20 @@
       "summary": "Before bulk-writing alt text to a Builder.io space, verify the model schema defines an alt sibling subfield. If not, the frontend component may be reading alt from a specific custom key and a PATCH that writes altText will be silently ignored by the rendered page.",
       "detail": "A Builder.io model can have a seoFields object with only metaTitle, metaDescription, featuredImage, schemaJson subfields. The Builder UI still shows a per-usage 'Alt text for this page' input, but that writes an ad hoc field the frontend may or may not render. Always map image field to alt field by inspecting the consuming component source before bulk PATCHing the Write API.",
       "addedAt": "2026-04-13"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Builder.io Write API enforces Firestore document limits: PATCH returns 500 with 'Input object is deeper than 20 levels or contains a cycle' when the merged data tree exceeds 20 nesting levels. Cannot patch deeply nested page entries (often Symbol-within-Symbol layouts). Workaround: edit those entries via Builder.io UI which can flatten on save, or refactor the page structure first.",
+      "detail": "Hit on a Pricing page with many Columns -> Sections -> Symbols nesting. The PATCH body itself is small, but the resulting merged document violates Firestore's 20-level depth limit.",
+      "addedAt": "2026-04-13"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "When deduping CDN image URLs by their first 12 hex chars of the asset id, you can collide. Different uploads of the same source photo share a long common prefix. Always dedupe by full URL (or full asset id), not a truncated prefix.",
+      "detail": "In a bulk image audit, two different Builder.io assets started with the same 12 hex chars (9b5322c33a0d) but referenced different files. The truncated-prefix dedup map silently dropped one of them and that entry got NO-OP'd.",
+      "addedAt": "2026-04-13"
     }
   ]
 }
