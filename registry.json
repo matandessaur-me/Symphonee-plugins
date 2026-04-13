@@ -7,7 +7,7 @@
       "name": "Builder.io",
       "description": "Manage Builder.io models, schemas, and content entries with AI-powered actions",
       "author": "M8N-MatanDessaur",
-      "version": "2.3.3",
+      "version": "2.3.4",
       "icon": "blocks",
       "tint": "160, 120, 210",
       "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-builderio",
