@@ -197,6 +197,13 @@
       "summary": "Builder.io plugin /assets?query=<value> can time out at 30s because it paginates through the full asset library on the Builder admin API for each call. Use a larger curl --max-time (120s+) or pre-cache via /assets full scan first.",
       "detail": "Asset search is not a real server-side filter on the Builder side, the plugin scans pages and filters locally. Short timeouts will kill the request mid-scan.",
       "addedAt": "2026-04-13"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "Before bulk-writing alt text to a Builder.io space, verify the model schema defines an alt sibling subfield. If not, the frontend component may be reading alt from a specific custom key and a PATCH that writes altText will be silently ignored by the rendered page.",
+      "detail": "A Builder.io model can have a seoFields object with only metaTitle, metaDescription, featuredImage, schemaJson subfields. The Builder UI still shows a per-usage 'Alt text for this page' input, but that writes an ad hoc field the frontend may or may not render. Always map image field to alt field by inspecting the consuming component source before bulk PATCHing the Write API.",
+      "addedAt": "2026-04-13"
     }
   ]
 }
