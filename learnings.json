@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-10",
+  "updated": "2026-04-13",
   "learnings": [
     {
       "category": "cli-flags",
@@ -120,6 +120,34 @@
       "summary": "Push-AndPR.ps1 breaks when -Description contains commas, apostrophes, or other special characters. PowerShell string parsing fails with TerminatorExpectedAtEndOfString. Instead, push the branch manually with git push -u origin HEAD, then create the PR via curl to POST /api/pull-request with a JSON body, which handles special characters correctly.",
       "detail": null,
       "addedAt": "2026-04-10"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Builder-style image audits can produce false positives when custom components render alt text from fields such as imageAltText or imageAltTag instead of alt or altText.",
+      "detail": "Before bulk editing CMS image alt text, inspect the consuming component code and treat component-specific alt fields as valid. Do not rely only on a generic audit that recognizes alt and altText.",
+      "addedAt": "2026-04-13"
+    },
+    {
+      "category": "platform",
+      "cli": null,
+      "summary": "System.Drawing Bitmap.Save may throw a generic GDI+ error when saving generated images into dot-prefixed workspace folders.",
+      "detail": "If this happens, save the generated image to a normal writable path, verify the file exists, then clean it up after use. Do not assume the drawing code failed before testing a simpler output path.",
+      "addedAt": "2026-04-13"
+    },
+    {
+      "category": "shell",
+      "cli": null,
+      "summary": "In PowerShell loops, Invoke-RestMethod failures can leave a previous response variable in place and make later logging look like a false success.",
+      "detail": "Reset the response variable before each request or wrap Invoke-RestMethod in try/catch. On catch, log the failure separately and do not read stale response data from a previous iteration.",
+      "addedAt": "2026-04-13"
+    },
+    {
+      "category": "shell",
+      "cli": null,
+      "summary": "curl.exe JSON POSTs from PowerShell can hang or time out when inline body quoting is misescaped.",
+      "detail": "For local API writes from PowerShell, prefer Invoke-RestMethod with a hashtable converted by ConvertTo-Json, or write complex JSON to a temp file and post that. Avoid deeply escaped inline curl JSON bodies.",
+      "addedAt": "2026-04-13"
     }
   ]
 }
