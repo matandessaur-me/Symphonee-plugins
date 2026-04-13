@@ -183,6 +183,20 @@
       "summary": "curl -o to a path whose parent dir does not exist fails with exit code 23 and size=0 even though it prints HTTP:200. The HTTP status is returned before write, so it is misleading.",
       "detail": "On Windows bash, shell cwd can reset between tool calls, landing in a subdir. Any relative path that assumed the project root then fails. Always mkdir -p the target dir in the same bash call as the curl, or use an absolute path. Always check curl exit code, not just the HTTP status from -w.",
       "addedAt": "2026-04-13"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Builder.io plugin does not expose GET /assets/:id for single-asset fetch. Calling it hangs until the bash timeout. Use GET /assets?query=... or /assets?limit=... and filter by id in the response instead.",
+      "detail": "The routes module registers PATCH /assets/:id and DELETE /assets/:id but no GET. An unmatched GET path falls through to a handler that never responds, so curl hits its timeout rather than getting a 404.",
+      "addedAt": "2026-04-13"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Builder.io plugin /assets?query=<value> can time out at 30s because it paginates through the full asset library on the Builder admin API for each call. Use a larger curl --max-time (120s+) or pre-cache via /assets full scan first.",
+      "detail": "Asset search is not a real server-side filter on the Builder side, the plugin scans pages and filters locally. Short timeouts will kill the request mid-scan.",
+      "addedAt": "2026-04-13"
     }
   ]
 }
