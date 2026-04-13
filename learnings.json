@@ -162,6 +162,20 @@
       "summary": "When parsing markdown table rows with node -e, always guard cells.length before indexing. Header separator rows (|---|---|) split into fewer cells than data rows and cause TypeError on cells[N].replace. Skip rows where cells.length is below the expected column count.",
       "detail": "Encountered TypeError: Cannot read properties of undefined (reading replace) while parsing a markdown table via l.split(|). The offending line was a style-laden STORY row that split unevenly due to embedded HTML. Fix: add `if (cells.length < EXPECTED) continue;` before destructuring, and strip HTML with replace(/<[^>]+>/g, ) before trimming.",
       "addedAt": "2026-04-13"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Builder.io plugin GET /entries/:model hangs/404s; use GET /content/:model?limit=N instead. /entries is not the real route.",
+      "detail": "The instructions table lists Get-Entries.ps1 (-Model), but the REST route for listing entries is /api/plugins/builderio/content/MODEL_NAME?limit=N. Calling /api/plugins/builderio/entries/MODEL never returns.",
+      "addedAt": "2026-04-13"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Builder.io /insights?issue=missing-alt under-reports: default detector only matches alt/altText siblings. Custom field names (imageAltTag, videoAltTag, desktopImageAltTag, featuredImage without alt sibling, etc.) are missed and counts come back as 0 even when hundreds of images lack alt.",
+      "detail": "For accurate alt audits on spaces with custom component schemas, fetch /content/MODEL and walk the data tree yourself. Recognize: alt, altText, altTag, imageAlt*, desktopImageAlt*, mobileImageAlt*, videoAlt*, iconAlt*, featuredImageAlt, mediaAlt*. Also handle LocalizedValue objects where each locale key may be a string URL or alt text.",
+      "addedAt": "2026-04-13"
     }
   ]
 }
