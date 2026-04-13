@@ -218,6 +218,13 @@
       "summary": "When deduping CDN image URLs by their first 12 hex chars of the asset id, you can collide. Different uploads of the same source photo share a long common prefix. Always dedupe by full URL (or full asset id), not a truncated prefix.",
       "detail": "In a bulk image audit, two different Builder.io assets started with the same 12 hex chars (9b5322c33a0d) but referenced different files. The truncated-prefix dedup map silently dropped one of them and that entry got NO-OP'd.",
       "addedAt": "2026-04-13"
+    },
+    {
+      "category": "orchestration",
+      "cli": null,
+      "summary": "Orchestrator's claude CLI worker can hit a circuit-breaker after a few headless task failures, blocking further claude spawns until it cools down. Symptom: 'Retry failed: CLI claude circuit breaker is OPEN'. Workaround: switch to gemini, codex, or grok for that batch of work and resume claude later.",
+      "detail": "Hit when spawning 4 parallel claude workers for vision tasks. Worker tasks failed initially (likely a flag/cwd issue) and the breaker tripped, locking out further claude spawns even with corrected prompts.",
+      "addedAt": "2026-04-13"
     }
   ]
 }
