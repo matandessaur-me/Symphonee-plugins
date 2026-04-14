@@ -267,6 +267,13 @@
       "summary": "Branch-skip propagation in a DAG scheduler must NOT blindly mark every descendant of the skipped node as skipped. A merge node that depends on both branches still has a valid path through the taken branch and should run. The correct rule: a node is only skipped when every one of its dependencies is already in the skip set; iterate to a fixed point so chained merges resolve. Separately: after marking skipped nodes as terminal (cancelled), the scheduler must continue re-checking ready nodes on the same pass, not break out of the loop, because newly-unblocked merge nodes need to be picked up immediately.",
       "detail": "Hit in the v1 graph-runs engine. Test graph: decide -> (big | small) -> summary. When small was skipped by the branch, descendantsOf(small) included summary, so summary was marked skipped too even though big was reachable. Separate bug: even after fixing the skip propagation, the scheduler broke out of its loop the moment it marked the skipped node cancelled, so the summary merge never got scheduled in the same pass.",
       "addedAt": "2026-04-14"
+    },
+    {
+      "category": "cli-flags",
+      "cli": "claude",
+      "summary": "claude: API Error: Request rejected (429) · This request would exceed your organization's rate limit of 30,000 input tokens per",
+      "detail": "Failed args: [\"--append-system-prompt\",\"You are a worker agent. NEVER use sleep commands. NEVER poll with curl in a loop. Just do the task and output the result. Do not dispatch sub-tasks to other CLIs. Do not call orchestrator APIs. Focus only on the task in the prompt.\",\"--dangerously-skip-permissions\",\"-p\"]",
+      "addedAt": "2026-04-14"
     }
   ]
 }
