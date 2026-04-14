@@ -239,6 +239,13 @@
       "summary": "DevOps Pilot notes read endpoint is GET /api/notes/read?name={name}, not GET /api/notes/{name}. The /{name} path returns a plain text 404 Not Found and wastes a round-trip. Also URL-encode parentheses in note names: ( is %28, ) is %29 � leaving them raw can yield an empty body depending on the shell.",
       "detail": "First attempt curl /api/notes/DYOB%203.0%20Phased%20Execution%20Plan returned Not found. Correct route per /api/instructions is /api/notes/read?name=... and parens in the name must be percent-encoded.",
       "addedAt": "2026-04-14"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "When smoke-testing an async scheduler that can spawn external processes (HTTP calls, child CLIs), keep the test to self-contained node types only (branch, approval, state mutation). Worker/tool nodes that call out to a live server will hang the test when the server is not up, and the scheduler will stay stuck in running state rather than finishing. Prefer mocking the spawn layer or covering external-facing node types with an integration test that explicitly boots the server first.",
+      "detail": "Hit while writing a smoke test for a graph workflow engine. Test defined a branch + two worker nodes and expected terminal state in ~800ms. Instead, the branch correctly took one path, but the downstream worker node blocked on an HTTP call to /api/orchestrator/spawn that was never going to resolve, leaving the run status=running forever.",
+      "addedAt": "2026-04-14"
     }
   ]
 }
