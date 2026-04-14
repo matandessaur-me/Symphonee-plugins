@@ -5,7 +5,7 @@
     {
       "id": "azure-devops",
       "name": "Azure DevOps",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Azure DevOps: work items, iterations, teams, velocity, areas, activity, AB# auto-linking",
       "icon": "kanban",
       "tint": "0, 120, 215",
@@ -104,7 +104,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "GitHub integration: repositories, pull requests, reviews, cloning, git log",
       "icon": "github",
       "tint": "110, 125, 170",
