@@ -253,6 +253,20 @@
       "summary": "MCP tools are ONLY for exposing DevOps Pilot capabilities to external clients (Claude Desktop, Cursor, VS Code, Zed). When building a new DevOps Pilot feature, the primary interaction surfaces are (1) a PowerShell or Node script in ./scripts/, and (2) a UI surface in the dashboard. MCP is additive icing on top of those, not a substitute. Do not ship a feature that is only reachable via MCP from outside the app.",
       "detail": "Rule from the project owner. Scripts are the canonical invocation path inside DevOps Pilot. UI gives visibility. MCP gives external interop. A complete feature ships all three, in that priority order.",
       "addedAt": "2026-04-14"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "When persisting a workflow engine that has in-memory blocking primitives (Promise resolvers for human-approval gates, worker wait loops), the persistence layer must also persist the RESOLUTION state, not just the pending state. On restart, the in-memory resolver is gone, so clicking Approve becomes a no-op unless the engine re-enters the scheduler and recreates the waiter. Minimum viable fix: on load, reset any awaiting-approval nodes to pending and re-run the scheduler, which recreates a fresh waiter. Better fix: persist the approval decision to disk when the user clicks so a resumed run can skip past already-answered approvals without re-prompting.",
+      "detail": "Hit while shipping graph-runs BETA. A run that hit an approval node and survived an app restart showed up in the approval modal, but clicking Approve returned {ok:true} silently and did nothing because approvalWaiters.get(key) returned undefined.",
+      "addedAt": "2026-04-14"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "Branch-skip propagation in a DAG scheduler must NOT blindly mark every descendant of the skipped node as skipped. A merge node that depends on both branches still has a valid path through the taken branch and should run. The correct rule: a node is only skipped when every one of its dependencies is already in the skip set; iterate to a fixed point so chained merges resolve. Separately: after marking skipped nodes as terminal (cancelled), the scheduler must continue re-checking ready nodes on the same pass, not break out of the loop, because newly-unblocked merge nodes need to be picked up immediately.",
+      "detail": "Hit in the v1 graph-runs engine. Test graph: decide -> (big | small) -> summary. When small was skipped by the branch, descendantsOf(small) included summary, so summary was marked skipped too even though big was reachable. Separate bug: even after fixing the skip propagation, the scheduler broke out of its loop the moment it marked the skipped node cancelled, so the summary merge never got scheduled in the same pass.",
+      "addedAt": "2026-04-14"
     }
   ]
 }
