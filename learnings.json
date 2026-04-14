@@ -246,6 +246,13 @@
       "summary": "When smoke-testing an async scheduler that can spawn external processes (HTTP calls, child CLIs), keep the test to self-contained node types only (branch, approval, state mutation). Worker/tool nodes that call out to a live server will hang the test when the server is not up, and the scheduler will stay stuck in running state rather than finishing. Prefer mocking the spawn layer or covering external-facing node types with an integration test that explicitly boots the server first.",
       "detail": "Hit while writing a smoke test for a graph workflow engine. Test defined a branch + two worker nodes and expected terminal state in ~800ms. Instead, the branch correctly took one path, but the downstream worker node blocked on an HTTP call to /api/orchestrator/spawn that was never going to resolve, leaving the run status=running forever.",
       "addedAt": "2026-04-14"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "MCP tools are ONLY for exposing DevOps Pilot capabilities to external clients (Claude Desktop, Cursor, VS Code, Zed). When building a new DevOps Pilot feature, the primary interaction surfaces are (1) a PowerShell or Node script in ./scripts/, and (2) a UI surface in the dashboard. MCP is additive icing on top of those, not a substitute. Do not ship a feature that is only reachable via MCP from outside the app.",
+      "detail": "Rule from the project owner. Scripts are the canonical invocation path inside DevOps Pilot. UI gives visibility. MCP gives external interop. A complete feature ships all three, in that priority order.",
+      "addedAt": "2026-04-14"
     }
   ]
 }
