@@ -274,6 +274,13 @@
       "summary": "claude: API Error: Request rejected (429) · This request would exceed your organization's rate limit of 30,000 input tokens per",
       "detail": "Failed args: [\"--append-system-prompt\",\"You are a worker agent. NEVER use sleep commands. NEVER poll with curl in a loop. Just do the task and output the result. Do not dispatch sub-tasks to other CLIs. Do not call orchestrator APIs. Focus only on the task in the prompt.\",\"--dangerously-skip-permissions\",\"-p\"]",
       "addedAt": "2026-04-14"
+    },
+    {
+      "category": "orchestration",
+      "cli": null,
+      "summary": "When an AI CLI worker fails with a class-of-error that strongly suggests switching models would help (token limit, rate limit, quota exceeded, context length, circuit breaker open, auth/key error, overloaded, insufficient_quota), the caller should automatically retry with a different CLI from the model router rather than surfacing the failure to the user. Track which CLIs have been tried so the router can exclude them. Cap attempts at 3 to avoid infinite loops. Non-retryable errors (bad arguments, permission deny, not-found) should fail fast without retry.",
+      "detail": "Hit in graph-runs v1 where a 4-step test graph (number -> haiku -> summarize) failed on the summary node because Claude had hit its token limit. The engine surfaced the raw failure instead of transparently switching to Codex or Gemini. Fix: _runWorkerNode now loops up to 3 times, re-querying the model router with excludeClis on each retry-worthy failure.",
+      "addedAt": "2026-04-14"
     }
   ]
 }
