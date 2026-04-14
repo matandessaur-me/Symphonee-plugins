@@ -3,6 +3,39 @@
   "updated": "2026-04-13",
   "plugins": [
     {
+      "id": "azure-devops",
+      "name": "Azure DevOps",
+      "version": "0.1.0",
+      "description": "Azure DevOps: work items, iterations, teams, velocity, areas, activity, AB# auto-linking",
+      "icon": "kanban",
+      "tint": "0, 120, 215",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-azure-devops",
+      "keywords": [
+        "azure devops",
+        "ado",
+        "work item",
+        "workitems",
+        "backlog",
+        "sprint",
+        "iteration",
+        "velocity",
+        "burndown",
+        "team capacity",
+        "team",
+        "area path",
+        "user story",
+        "bug",
+        "task",
+        "feature",
+        "epic",
+        "standup",
+        "retro",
+        "retrospective",
+        "AB#",
+        "ab-reference"
+      ]
+    },
+    {
       "id": "builderio",
       "name": "Builder.io",
       "description": "Manage Builder.io models, schemas, and content entries with AI-powered actions",
@@ -15,38 +48,6 @@
         "cms",
         "builder.io",
         "content"
-      ]
-    },
-    {
-      "id": "wrike",
-      "name": "Wrike",
-      "description": "Task management, board view, cross-sync with Azure DevOps",
-      "author": "M8N-MatanDessaur",
-      "version": "1.1.0",
-      "icon": "check-square",
-      "tint": "100, 200, 120",
-      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-wrike",
-      "tags": [
-        "project-management",
-        "wrike",
-        "tasks"
-      ]
-    },
-    {
-      "id": "ga4-gtm",
-      "name": "GA4 & GTM Analytics",
-      "description": "Google Analytics 4 and Tag Manager dashboard with AI-powered tag audits and event tracking",
-      "author": "M8N-MatanDessaur",
-      "version": "1.1.0",
-      "icon": "bar-chart-3",
-      "tint": "66, 133, 244",
-      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-ga4-gtm",
-      "tags": [
-        "analytics",
-        "ga4",
-        "gtm",
-        "google",
-        "marketing"
       ]
     },
     {
@@ -67,6 +68,61 @@
       ]
     },
     {
+      "id": "env-manager",
+      "name": "Environment Manager",
+      "description": "Manage .env files across repos -- compare environments, detect secrets, find missing variables",
+      "author": "M8N-MatanDessaur",
+      "version": "1.1.0",
+      "icon": "file-key",
+      "tint": "245, 158, 11",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-env-manager",
+      "tags": [
+        "env",
+        "secrets",
+        "config",
+        "environment-variables",
+        "security"
+      ]
+    },
+    {
+      "id": "ga4-gtm",
+      "name": "GA4 & GTM Analytics",
+      "description": "Google Analytics 4 and Tag Manager dashboard with AI-powered tag audits and event tracking",
+      "author": "M8N-MatanDessaur",
+      "version": "1.1.0",
+      "icon": "bar-chart-3",
+      "tint": "66, 133, 244",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-ga4-gtm",
+      "tags": [
+        "analytics",
+        "ga4",
+        "gtm",
+        "google",
+        "marketing"
+      ]
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "version": "0.1.0",
+      "description": "GitHub integration: repositories, pull requests, reviews, cloning, git log",
+      "icon": "github",
+      "tint": "110, 125, 170",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-github",
+      "keywords": [
+        "github",
+        "git hub",
+        "gh",
+        "pull request",
+        "pr",
+        "code review",
+        "clone repo",
+        "clone from github",
+        "github repo",
+        "github repos"
+      ]
+    },
+    {
       "id": "release-manager",
       "name": "Release Manager",
       "description": "Track ADO pipelines, generate release notes from work items and commits, monitor pipeline health",
@@ -84,20 +140,21 @@
       ]
     },
     {
-      "id": "env-manager",
-      "name": "Environment Manager",
-      "description": "Manage .env files across repos -- compare environments, detect secrets, find missing variables",
+      "id": "sanity",
+      "name": "Sanity",
+      "description": "Manage Sanity.io datasets, document types, and documents with AI-powered actions",
       "author": "M8N-MatanDessaur",
-      "version": "1.1.0",
-      "icon": "file-key",
-      "tint": "245, 158, 11",
-      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-env-manager",
+      "version": "1.3.0",
+      "icon": "database",
+      "tint": "242, 77, 52",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-sanity",
       "tags": [
-        "env",
-        "secrets",
-        "config",
-        "environment-variables",
-        "security"
+        "sanity",
+        "cms",
+        "headless",
+        "groq",
+        "content",
+        "studio"
       ]
     },
     {
@@ -137,21 +194,18 @@
       ]
     },
     {
-      "id": "sanity",
-      "name": "Sanity",
-      "description": "Manage Sanity.io datasets, document types, and documents with AI-powered actions",
+      "id": "wrike",
+      "name": "Wrike",
+      "description": "Task management, board view, cross-sync with Azure DevOps",
       "author": "M8N-MatanDessaur",
-      "version": "1.3.0",
-      "icon": "database",
-      "tint": "242, 77, 52",
-      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-sanity",
+      "version": "1.1.0",
+      "icon": "check-square",
+      "tint": "100, 200, 120",
+      "repo": "https://github.com/M8N-MatanDessaur/devops-pilot-plugin-wrike",
       "tags": [
-        "sanity",
-        "cms",
-        "headless",
-        "groq",
-        "content",
-        "studio"
+        "project-management",
+        "wrike",
+        "tasks"
       ]
     }
   ]
