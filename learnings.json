@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-13",
+  "updated": "2026-04-14",
   "learnings": [
     {
       "category": "cli-flags",
@@ -225,6 +225,20 @@
       "summary": "Orchestrator's claude CLI worker can hit a circuit-breaker after a few headless task failures, blocking further claude spawns until it cools down. Symptom: 'Retry failed: CLI claude circuit breaker is OPEN'. Workaround: switch to gemini, codex, or grok for that batch of work and resume claude later.",
       "detail": "Hit when spawning 4 parallel claude workers for vision tasks. Worker tasks failed initially (likely a flag/cwd issue) and the breaker tripped, locking out further claude spawns even with corrected prompts.",
       "addedAt": "2026-04-13"
+    },
+    {
+      "category": "shell",
+      "cli": null,
+      "summary": "Bash heredoc (cat <<EOF) fails with unexpected EOF when the body contains backticks or other shell metacharacters even with quoted delimiter when piped through tool boundaries. For long markdown content, use the Write tool to create the file directly, then feed it to save-note.js --file, instead of heredoc in a Bash call.",
+      "detail": "Saving a ~150-line markdown note via cat > file.md << NOTEEOF ... NOTEEOF returned: line 172: unexpected EOF while looking for matching quote. Switching to Write tool for the file, then calling node scripts/save-note.js --file, worked first try.",
+      "addedAt": "2026-04-14"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "DevOps Pilot notes read endpoint is GET /api/notes/read?name={name}, not GET /api/notes/{name}. The /{name} path returns a plain text 404 Not Found and wastes a round-trip. Also URL-encode parentheses in note names: ( is %28, ) is %29 � leaving them raw can yield an empty body depending on the shell.",
+      "detail": "First attempt curl /api/notes/DYOB%203.0%20Phased%20Execution%20Plan returned Not found. Correct route per /api/instructions is /api/notes/read?name=... and parens in the name must be percent-encoded.",
+      "addedAt": "2026-04-14"
     }
   ]
 }
