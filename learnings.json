@@ -337,6 +337,13 @@
       "summary": "Core shell instructions must be fully plugin-agnostic",
       "detail": "Core instruction files (INSTRUCTIONS.base.md, dashboard/instructions/*.md, /api/bootstrap payload) must not mention any specific plugin by name. That includes no sentences like -if the Azure DevOps plugin is installed- or -when the GitHub plugin is active-. Every plugin (including ADO and GitHub) must be treated identically to Builder.io, Sanity, WordPress, etc.: plugin-specific rules live inside the plugin folder at instructions.md and are fetched via /api/plugins/instructions on demand. The core should only describe the generic plugin system (discovery by keyword, ask before use, fetch that plugin instructions).",
       "addedAt": "2026-04-15"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "PR description via /api/pull-request rendered as [object Object] when passed a string from Get-Content -Raw",
+      "detail": "When creating a PR via POST /api/pull-request (or New-PullRequest.ps1), the description field did not render a multi-line string correctly and showed [object Object] in the GitHub PR body. After creating a PR, always verify the rendered description on GitHub. Safer pattern: keep description short and inline, or update the PR body via GitHub API after creation (PATCH /repos/:owner/:repo/pulls/:number with body field) if the initial render is wrong.",
+      "addedAt": "2026-04-15"
     }
   ]
 }
