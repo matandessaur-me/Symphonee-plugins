@@ -323,6 +323,13 @@
       "summary": "Audit/readiness review requests are read-only unless the user explicitly asks for fixes",
       "detail": "When the user asks to compare branches, audit readiness, or check whether a branch is ready to merge, do not patch files or apply quick fixes. Report findings and recommendations only. If fixes seem obvious, ask before editing.",
       "addedAt": "2026-04-15"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "DevOps Pilot /api/pull-request uses repoName, sourceBranch, targetBranch (not repo/head/base).",
+      "detail": "POSTing {repo, head, base} to /api/pull-request returns 422 Validation Failed or \"repoName is required\". Correct payload: {\"repoName\":\"<configured name>\",\"sourceBranch\":\"<branch>\",\"targetBranch\":\"<base>\",\"title\":\"...\",\"body\":\"...\"}. Confirmed against the GitHub plugin route; response shape is {ok, pullRequestId, url, title}.",
+      "addedAt": "2026-04-15"
     }
   ]
 }
