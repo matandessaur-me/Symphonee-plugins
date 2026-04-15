@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-14",
+  "updated": "2026-04-15",
   "learnings": [
     {
       "category": "cli-flags",
@@ -281,6 +281,27 @@
       "summary": "When an AI CLI worker fails with a class-of-error that strongly suggests switching models would help (token limit, rate limit, quota exceeded, context length, circuit breaker open, auth/key error, overloaded, insufficient_quota), the caller should automatically retry with a different CLI from the model router rather than surfacing the failure to the user. Track which CLIs have been tried so the router can exclude them. Cap attempts at 3 to avoid infinite loops. Non-retryable errors (bad arguments, permission deny, not-found) should fail fast without retry.",
       "detail": "Hit in graph-runs v1 where a 4-step test graph (number -> haiku -> summarize) failed on the summary node because Claude had hit its token limit. The engine surfaced the raw failure instead of transparently switching to Codex or Gemini. Fix: _runWorkerNode now loops up to 3 times, re-querying the model router with excludeClis on each retry-worthy failure.",
       "addedAt": "2026-04-14"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "Removing a block from server.js that contains scattered unrelated helpers silently breaks consumers",
+      "detail": "During a large handler extraction (Phase 3b), splice-deleting a line range in server.js accidentally removed handleImportConfig and sanitizeText, which were interleaved with the target ADO handlers but used by unrelated code paths. The dashboard lost /api/config/import and crashed on startup with \"sanitizeText is not defined\". Lesson: after any multi-hundred-line deletion in a monolithic server file, grep for every function name in the deleted block against the rest of the file before committing. A quick node --check passes because the calls are runtime-only. Also: watch for functions that appear to be topic-local but are actually generic utilities (sanitizeText, proxyHtmlImages patterns) -- move them to a clearly-labeled utility section before deleting the surrounding context.",
+      "addedAt": "2026-04-15"
+    },
+    {
+      "category": "shell",
+      "cli": null,
+      "summary": "PowerShell curl alias prompts for Uri when given -s flag",
+      "detail": "In Windows PowerShell, `curl` is an alias for Invoke-WebRequest. The -s flag prefix-matches -SessionVariable / -SkipCertificateCheck (ambiguous), causing PowerShell to discard the URL and prompt `Uri:` interactively. Use `Invoke-RestMethod <url>` (returns parsed JSON) or `curl.exe -s <url>` (real curl binary) to bypass the alias. Bash does not have this alias; curl -s works there as expected.",
+      "addedAt": "2026-04-15"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "Frontend caches plugin list once per page load; config changes mid-session can leave cache stale",
+      "detail": "The dashboard initPlugins IIFE fetches /api/plugins once and caches the result in _loadedPlugins. Config-keyed plugins whose activationConditions.configKeys flip from unsatisfied to satisfied mid-session (e.g. user just saved their PAT) stay absent from the cached list until the next page load. Fix: refreshPluginActivation() diff after saveSettings() and auto-restart when the active plugin set changes, since contributions are injected once at startup and are not reversible live.",
+      "addedAt": "2026-04-15"
     }
   ]
 }
