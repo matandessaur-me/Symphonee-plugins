@@ -309,6 +309,13 @@
       "summary": "Async prefix route handlers that return false silently consume requests in a naive dispatcher",
       "detail": "When a route dispatcher checks `if (result !== false) return;` against an async handler, the handler returns Promise<false>, which is truthy in that check -- so the request is treated as handled and no response is written. Browser hangs until socket timeout. Fix: if the handler returns a Promise, await it before the === false comparison. Symptom I saw: /api/plugins/registry + every /api/plugins/<x> non-config path hung forever after a generic /api/plugins/<id>/config async prefix handler was added; its fall-through path (`if (!match) return false;`) quietly swallowed all other prefix traffic.",
       "addedAt": "2026-04-15"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "rightTabs contribution expects iframe HTML; dont use it for tabs whose rendering still lives in core",
+      "detail": "Plugin SDK has TWO ways to own a right-column intel tab: (a) rightTabs = iframe-backed, plugin ships ui/<tab>.html, shell injects an iframe and a new closable button; (b) legacyNativeRightTabs = claim an existing hardcoded intelTab-<id> button, rendering logic stays in core. Mixing them up (declaring rightTabs when the rendering logic is still in core) injects duplicate buttons backed by broken iframes pointing at files the plugin does not ship. Same rule applies to centerTabs vs legacyNativeTabs. When migrating, change the manifest field AT THE SAME TIME as you move the rendering into the plugin, never before.",
+      "addedAt": "2026-04-15"
     }
   ]
 }
