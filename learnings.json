@@ -316,6 +316,13 @@
       "summary": "rightTabs contribution expects iframe HTML; dont use it for tabs whose rendering still lives in core",
       "detail": "Plugin SDK has TWO ways to own a right-column intel tab: (a) rightTabs = iframe-backed, plugin ships ui/<tab>.html, shell injects an iframe and a new closable button; (b) legacyNativeRightTabs = claim an existing hardcoded intelTab-<id> button, rendering logic stays in core. Mixing them up (declaring rightTabs when the rendering logic is still in core) injects duplicate buttons backed by broken iframes pointing at files the plugin does not ship. Same rule applies to centerTabs vs legacyNativeTabs. When migrating, change the manifest field AT THE SAME TIME as you move the rendering into the plugin, never before.",
       "addedAt": "2026-04-15"
+    },
+    {
+      "category": "general",
+      "cli": "codex",
+      "summary": "Audit/readiness review requests are read-only unless the user explicitly asks for fixes",
+      "detail": "When the user asks to compare branches, audit readiness, or check whether a branch is ready to merge, do not patch files or apply quick fixes. Report findings and recommendations only. If fixes seem obvious, ask before editing.",
+      "addedAt": "2026-04-15"
     }
   ]
 }
