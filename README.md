@@ -1,11 +1,11 @@
-# DevOps Pilot Plugin Registry & Shared Intelligence
+# Symphonee Plugin Registry & Shared Intelligence
 
-Official plugin registry and shared learnings for [DevOps Pilot](https://github.com/matandessaur-me/DevOps-Pilot).
+Official plugin registry and shared learnings for [Symphonee](https://github.com/matandessaur-me/Symphonee) -- the execution engine for AI workflows.
 
 ## What This Repo Contains
 
 - **registry.json** -- Plugin registry listing all available plugins, versions, and repo URLs
-- **learnings.json** -- Collective intelligence shared across all DevOps Pilot installations
+- **learnings.json** -- Collective intelligence shared across all Symphonee installations
 
 ## Available Plugins
 
@@ -19,29 +19,31 @@ Official plugin registry and shared learnings for [DevOps Pilot](https://github.
 | [Environment Manager](https://github.com/M8N-MatanDessaur/devops-pilot-plugin-env-manager) | Manage .env files across repos | 1.1.0 |
 | [Sentry](https://github.com/M8N-MatanDessaur/devops-pilot-plugin-sentry) | Monitor application errors via Sentry | 1.1.0 |
 
+> Plugin package names still use the `devops-pilot-plugin-*` prefix for install-base stability. A later release will migrate them to `symphonee-plugin-*`.
+
 ## Shared Learnings (Collective Intelligence)
 
-DevOps Pilot instances automatically record generic technical learnings (CLI quirks, shell gotchas, platform issues) and can sync them through this repo. This creates a collective knowledge base that makes every installation smarter over time.
+Symphonee instances automatically record generic technical learnings (CLI quirks, shell gotchas, platform issues) and can sync them through this repo. This creates a collective knowledge base that makes every installation smarter over time.
 
 **How it works:**
-1. When an AI agent encounters a technical failure (wrong CLI flags, shell issues, etc.), the system records it locally
-2. On sync, unsynced learnings are pushed to `learnings.json` in this repo
-3. On startup, every instance pulls the latest shared learnings
-4. Learnings are injected into AI instruction files so agents avoid known pitfalls
+1. When an AI agent encounters a technical failure (wrong CLI flags, shell issues, etc.), the system records it locally.
+2. On sync, unsynced learnings are pushed to `learnings.json` in this repo.
+3. On startup, every instance pulls the latest shared learnings.
+4. Learnings are injected into AI instruction files so agents avoid known pitfalls.
 
 **Safety guarantees:**
-- No company names, project names, or client data is ever recorded
-- No secrets, API keys, tokens, or credentials
-- No URLs, file paths, or machine-specific information
-- All content is sanitized before local storage and again before sharing
-- Entries containing sensitive content are automatically rejected
+- No company names, project names, or client data is ever recorded.
+- No secrets, API keys, tokens, or credentials.
+- No URLs, file paths, or machine-specific information.
+- All content is sanitized before local storage and again before sharing.
+- Entries containing sensitive content are automatically rejected.
 
 ## How to Submit a Plugin
 
-1. Create a GitHub repo with your plugin (must have a `plugin.json` at the root)
-2. Fork this repo
-3. Add your plugin to `registry.json`
-4. Submit a pull request
+1. Create a GitHub repo with your plugin (must have a `plugin.json` at the root).
+2. Fork this repo.
+3. Add your plugin to `registry.json`.
+4. Submit a pull request.
 
 ## Plugin Structure
 
@@ -49,4 +51,4 @@ Your plugin repo must contain at minimum:
 - `plugin.json` -- manifest with id, name, version, description, contributions
 - `routes.js` -- server-side API routes (if needed)
 
-See the [Plugin SDK docs](https://github.com/matandessaur-me/DevOps-Pilot) for full documentation.
+See the [Symphonee repo](https://github.com/matandessaur-me/Symphonee) for full SDK documentation.
