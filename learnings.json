@@ -330,6 +330,13 @@
       "summary": "DevOps Pilot /api/pull-request uses repoName, sourceBranch, targetBranch (not repo/head/base).",
       "detail": "POSTing {repo, head, base} to /api/pull-request returns 422 Validation Failed or \"repoName is required\". Correct payload: {\"repoName\":\"<configured name>\",\"sourceBranch\":\"<branch>\",\"targetBranch\":\"<base>\",\"title\":\"...\",\"body\":\"...\"}. Confirmed against the GitHub plugin route; response shape is {ok, pullRequestId, url, title}.",
       "addedAt": "2026-04-15"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "Core shell instructions must be fully plugin-agnostic",
+      "detail": "Core instruction files (INSTRUCTIONS.base.md, dashboard/instructions/*.md, /api/bootstrap payload) must not mention any specific plugin by name. That includes no sentences like -if the Azure DevOps plugin is installed- or -when the GitHub plugin is active-. Every plugin (including ADO and GitHub) must be treated identically to Builder.io, Sanity, WordPress, etc.: plugin-specific rules live inside the plugin folder at instructions.md and are fetched via /api/plugins/instructions on demand. The core should only describe the generic plugin system (discovery by keyword, ask before use, fetch that plugin instructions).",
+      "addedAt": "2026-04-15"
     }
   ]
 }
