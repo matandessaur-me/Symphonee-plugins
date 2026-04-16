@@ -351,6 +351,13 @@
       "summary": "git worktree remove fails with Filename too long when node_modules present on Windows. Mirror an empty dir over the worktree with robocopy /MIR first, then remove the now-empty dir, then git worktree prune.",
       "detail": "Deeply nested node_modules paths exceed MAX_PATH (260 chars) so git worktree remove --force errors with failed to delete <path>: Filename too long. Workaround: create an empty source dir, run robocopy.exe <empty> <worktree> /MIR /NFL /NDL /NJH /NJS /NC /NS to mirror (empties target), then Remove-Item -LiteralPath <worktree> -Recurse -Force, finally git worktree prune to clean the registry. Mirroring many node_modules is slow (tens of seconds per worktree), so run it in the background and poll the dir until it is gone.",
       "addedAt": "2026-04-16"
+    },
+    {
+      "category": "orchestration",
+      "cli": "codex",
+      "summary": "Codex workers spawned with cwd inside a Node project on Windows cannot invoke npm: the PowerShell shim fails with a StandardOutputEncoding error, so every npm command exits 1 immediately. Build verification via codex workers does not work on Windows.",
+      "detail": "Root cause: PowerShell runs C:/Program Files/nodejs/npm.ps1 which executes node.exe without redirection, triggering the StandardOutputEncoding error. Workaround options: (1) run the npm commands from the supervisor own bash session with run_in_background and log to a file, then poll the log; (2) in the worker prompt, invoke npm.cmd through cmd.exe so the PowerShell wrapper is bypassed.",
+      "addedAt": "2026-04-16"
     }
   ]
 }
