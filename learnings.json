@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-15",
+  "updated": "2026-04-16",
   "learnings": [
     {
       "category": "cli-flags",
@@ -344,6 +344,13 @@
       "summary": "PR description via /api/pull-request rendered as [object Object] when passed a string from Get-Content -Raw",
       "detail": "When creating a PR via POST /api/pull-request (or New-PullRequest.ps1), the description field did not render a multi-line string correctly and showed [object Object] in the GitHub PR body. After creating a PR, always verify the rendered description on GitHub. Safer pattern: keep description short and inline, or update the PR body via GitHub API after creation (PATCH /repos/:owner/:repo/pulls/:number with body field) if the initial render is wrong.",
       "addedAt": "2026-04-15"
+    },
+    {
+      "category": "platform",
+      "cli": null,
+      "summary": "git worktree remove fails with Filename too long when node_modules present on Windows. Mirror an empty dir over the worktree with robocopy /MIR first, then remove the now-empty dir, then git worktree prune.",
+      "detail": "Deeply nested node_modules paths exceed MAX_PATH (260 chars) so git worktree remove --force errors with failed to delete <path>: Filename too long. Workaround: create an empty source dir, run robocopy.exe <empty> <worktree> /MIR /NFL /NDL /NJH /NJS /NC /NS to mirror (empties target), then Remove-Item -LiteralPath <worktree> -Recurse -Force, finally git worktree prune to clean the registry. Mirroring many node_modules is slow (tens of seconds per worktree), so run it in the background and poll the dir until it is gone.",
+      "addedAt": "2026-04-16"
     }
   ]
 }
