@@ -365,6 +365,20 @@
       "summary": "For web research, dispatch codex via orchestrator — do not use the claude-code general-purpose Agent. The built-in subagent does not always have WebSearch/WebFetch available and will refuse to browse.",
       "detail": "Symptom: spawning a general-purpose Agent with a research prompt returned 'I don't have web search or browsing tools available in this environment' and produced a reasoned-from-premises answer rather than live-cited research. Fix: call Get-ModelRecommendation.ps1 -Intent web-research, then POST /api/orchestrator/spawn with {cli:'codex', model:'gpt-5.4', ...}. Codex has native web search; the model router picks it for the web-research intent. Rule of thumb: anything that needs fresh URLs or pricing pages goes to the orchestrator, never to a local Agent call.",
       "addedAt": "2026-04-17"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "/api/bootstrap response is ~84KB and overflows tool-result buffering; also breaks Read offset/limit because Read rejects files whose total token count exceeds the cap.",
+      "detail": "Calling curl http://127.0.0.1:3800/api/bootstrap from bash dumps the full JSON (~84KB). In Claude Code that exceeds the inline tool-result limit and gets persisted to a file. Subsequent Read calls with offset/limit still fail because Read validates against total file size, not the requested slice. Fix: pipe through a parser on the first call (e.g. `curl -s .../api/bootstrap | node -e \"let d=;process.stdin.on('data',c=>d+=c).on('end',()=>{const j=JSON.parse(d);console.log(j.checksum, j.context.activeRepo, j.permissions.settings.mode);})\"`) to extract just the fields you need, or use jq. Do not rely on reading the persisted dump.",
+      "addedAt": "2026-04-17"
+    },
+    {
+      "category": "cli-flags",
+      "cli": null,
+      "summary": "Get-ModelRecommendation.ps1 -Intent has a fixed ValidateSet; \"research\" is NOT a valid value, use \"web-research\" or \"web-research-cheap\".",
+      "detail": "Valid -Intent values are: quick-summary, deep-code, plan-and-implement, long-autonomy, web-research, web-research-cheap, pr-review, social-live, parallel-fanout, large-context. Passing \"research\" fails with a ValidateSet ParameterArgumentValidationError. For online research tasks use -Intent web-research (flagship) or web-research-cheap (budget).",
+      "addedAt": "2026-04-17"
     }
   ]
 }
