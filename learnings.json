@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-16",
+  "updated": "2026-04-17",
   "learnings": [
     {
       "category": "cli-flags",
@@ -358,6 +358,13 @@
       "summary": "Codex workers spawned with cwd inside a Node project on Windows cannot invoke npm: the PowerShell shim fails with a StandardOutputEncoding error, so every npm command exits 1 immediately. Build verification via codex workers does not work on Windows.",
       "detail": "Root cause: PowerShell runs C:/Program Files/nodejs/npm.ps1 which executes node.exe without redirection, triggering the StandardOutputEncoding error. Workaround options: (1) run the npm commands from the supervisor own bash session with run_in_background and log to a file, then poll the log; (2) in the worker prompt, invoke npm.cmd through cmd.exe so the PowerShell wrapper is bypassed.",
       "addedAt": "2026-04-16"
+    },
+    {
+      "category": "orchestration",
+      "cli": "claude",
+      "summary": "For web research, dispatch codex via orchestrator — do not use the claude-code general-purpose Agent. The built-in subagent does not always have WebSearch/WebFetch available and will refuse to browse.",
+      "detail": "Symptom: spawning a general-purpose Agent with a research prompt returned 'I don't have web search or browsing tools available in this environment' and produced a reasoned-from-premises answer rather than live-cited research. Fix: call Get-ModelRecommendation.ps1 -Intent web-research, then POST /api/orchestrator/spawn with {cli:'codex', model:'gpt-5.4', ...}. Codex has native web search; the model router picks it for the web-research intent. Rule of thumb: anything that needs fresh URLs or pricing pages goes to the orchestrator, never to a local Agent call.",
+      "addedAt": "2026-04-17"
     }
   ]
 }
