@@ -379,6 +379,13 @@
       "summary": "Get-ModelRecommendation.ps1 -Intent has a fixed ValidateSet; \"research\" is NOT a valid value, use \"web-research\" or \"web-research-cheap\".",
       "detail": "Valid -Intent values are: quick-summary, deep-code, plan-and-implement, long-autonomy, web-research, web-research-cheap, pr-review, social-live, parallel-fanout, large-context. Passing \"research\" fails with a ValidateSet ParameterArgumentValidationError. For online research tasks use -Intent web-research (flagship) or web-research-cheap (budget).",
       "addedAt": "2026-04-17"
+    },
+    {
+      "category": "orchestration",
+      "cli": "codex",
+      "summary": "Codex workers spawned via /api/orchestrator/spawn run sandboxed with network access disabled by default, so intents like web-research fail silently -- the task completes but the worker reports it could not run live searches.",
+      "detail": "A codex worker dispatched for a live-web-research task returned: \"Network access is restricted and approval is disabled, so I cannot run the required live web searches.\" The task state was completed (no error field), so the failure is only visible in the result text. Before dispatching codex for web-research, either (a) pass spawn options that enable network/approval, (b) route the task to a CLI with live search available, or (c) fall back to using the supervisors own WebSearch/WebFetch tools. Always inspect the result body before assuming success.",
+      "addedAt": "2026-04-17"
     }
   ]
 }
