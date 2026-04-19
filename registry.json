@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "updated": "2026-04-13",
+  "version": 4,
+  "updated": "2026-04-19",
   "plugins": [
     {
       "id": "azure-devops",
@@ -191,6 +191,29 @@
         "yoast",
         "rankmath",
         "media"
+      ]
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "description": "Dashboard-class Supabase control plane: create projects + orgs, deep DB / auth / storage stats, billing addons, disk config, Postgres tuning, edge functions with body download, actions, realtime channels, RLS, migrations, signing keys. Multi-project.",
+      "author": "M8N-MatanDessaur",
+      "version": "0.2.0",
+      "icon": "database-zap",
+      "tint": "62, 207, 142",
+      "repo": "https://github.com/M8N-MatanDessaur/symphonee-plugin-supabase",
+      "tags": [
+        "supabase",
+        "postgres",
+        "database",
+        "auth",
+        "storage",
+        "edge-functions",
+        "realtime",
+        "rls",
+        "organizations",
+        "billing",
+        "stats"
       ]
     },
     {
