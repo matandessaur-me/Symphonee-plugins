@@ -393,6 +393,13 @@
       "summary": "Loop detected: repeated \"fill_handle\" with same args. Agent must detect when navigation is stuck and call finish instead of retrying.",
       "detail": null,
       "addedAt": "2026-04-21"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Never guess Symphonee /api/* endpoints. The bootstrap payload already contains the full endpoint table in instructions (api-reference.md) -- grep it before calling.",
+      "detail": "Concrete example: there is no /api/browser/open. To open a URL you must POST /api/browser/launch, then POST /api/browser/navigate with { url }. /api/browser/launch does not accept a url field. When you hit a 404 on a /api/* route, search the instructions section of the bootstrap response (or /api/instructions) for the real route name -- do not guess variants or grep the source code first.",
+      "addedAt": "2026-04-21"
     }
   ]
 }
