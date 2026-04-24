@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-21",
+  "updated": "2026-04-24",
   "learnings": [
     {
       "category": "cli-flags",
@@ -400,6 +400,69 @@
       "summary": "Never guess Symphonee /api/* endpoints. The bootstrap payload already contains the full endpoint table in instructions (api-reference.md) -- grep it before calling.",
       "detail": "Concrete example: there is no /api/browser/open. To open a URL you must POST /api/browser/launch, then POST /api/browser/navigate with { url }. /api/browser/launch does not accept a url field. When you hit a 404 on a /api/* route, search the instructions section of the bootstrap response (or /api/instructions) for the real route name -- do not guess variants or grep the source code first.",
       "addedAt": "2026-04-21"
+    },
+    {
+      "category": "shell",
+      "cli": null,
+      "summary": "curl --data-binary @- with a heredoc can silently hang / return nothing on long-polling POST endpoints",
+      "detail": "Running curl POST with an inline heredoc body (<<EOF ... EOF) against an endpoint that spawns a long-running worker sometimes finishes with no output and no server-side side effect. Writing the JSON body to a real file first and POSTing with --data-binary @/path/to/file.json works reliably.",
+      "addedAt": "2026-04-24"
+    },
+    {
+      "category": "shell",
+      "cli": null,
+      "summary": "Windows bash /tmp is not the same path as Windows TEMP - cross-tool writes to /tmp will not be readable by PowerShell or Python scripts unless you share a common path",
+      "detail": "In Git-Bash on Windows, /tmp is a per-session unixy path, not C:/Windows/Temp. Python or PowerShell commands that need to read a bash-written file should use the Windows TEMP dir (expand %USERPROFILE%/AppData/Local/Temp) or a project-local path instead.",
+      "addedAt": "2026-04-24"
+    },
+    {
+      "category": "shell",
+      "cli": null,
+      "summary": "Passing a ~35KB string as an argv arg via $(cat file) triggers OS argv-length limits",
+      "detail": "Node and other CLIs error with Argument list too long (or Windows equivalent ~32KB cap) when a multi-KB string is inlined via command substitution. Use a --file flag that streams from disk instead.",
+      "addedAt": "2026-04-24"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Gemini 3.1 flash-image-preview reshuffles scene layout on non-square inputs; 1:1 edits reliably but introduces a zoom-crop regression if you pad-to-square and crop back",
+      "detail": "Community-documented behavior: the model recomposes layout (wrong camera angle, missing non-wet-zone items) when given non-square images. Pad-to-square workaround causes the model to treat the padded canvas as new generation space and shrink content. Better fix: detect the input aspect ratio and pass generationConfig.imageConfig.aspectRatio set to the closest supported ratio (1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9) so the model outputs at the native shape.",
+      "addedAt": "2026-04-24"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "Enumerated examples in preservation-style prompts can cause the model to inject those examples into the output",
+      "detail": "A prompt rule like Preserve the wall, whether it is brick, stone, wallpaper, wood grain, etc. biased the image model toward rendering brick even when the input wall was plain paint. Stripping the examples entirely worsened preservation - the model needs some anchor. Conclusion: give at most one neutral example (or none), never a long enumerated list, and never repeat the same example across multiple rules.",
+      "addedAt": "2026-04-24"
+    },
+    {
+      "category": "platform",
+      "cli": null,
+      "summary": "sharp.rotate() with no arguments applies EXIF orientation and strips the tag - critical for mobile portrait photos",
+      "detail": "Many phone cameras store portrait photos as landscape pixel grids plus an EXIF Orientation tag. Without calling sharp(buf).rotate() (no args) before reading width/height or doing any further processing, the pipeline sees swapped dimensions and misaligned subsequent crops.",
+      "addedAt": "2026-04-24"
+    },
+    {
+      "category": "general",
+      "cli": null,
+      "summary": "JavaScript const is not hoisted - using a const arrow function inside a useCallback defined earlier compiles but throws ReferenceError at runtime",
+      "detail": "tsc --noEmit checks types, not temporal dead zone. A React component that declares useCallback A which calls const B defined below will pass typecheck but fail at runtime when A fires. Either reorder so B is declared first, or use a ref pattern.",
+      "addedAt": "2026-04-24"
+    },
+    {
+      "category": "platform",
+      "cli": null,
+      "summary": "CSS display:none on a parent hides all children regardless of z-index - mounting a high-z-index overlay inside a display:none element makes it invisible",
+      "detail": "On mobile layouts where the desktop canvas element gets display:none via a media query, any child of that canvas (like a feedback button pill) is invisible no matter its z-index. The overlay has to be mounted inside the mobile-visible DOM tree instead, not the hidden desktop tree.",
+      "addedAt": "2026-04-24"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "FAL concurrency cap is 10 across all endpoints in an account - batch-SAM with 5 concurrency leaves headroom for mask download fetches on the same CDN",
+      "detail": "A SAM text-prompted pipeline that runs 30 prompts in parallel can hit concurrency limits because mask downloads from fal.media also count. Keep the SAM fan-out to ~5 so parallel mask fetches have room.",
+      "addedAt": "2026-04-24"
     }
   ]
 }
