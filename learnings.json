@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-24",
+  "updated": "2026-04-27",
   "learnings": [
     {
       "category": "cli-flags",
@@ -463,6 +463,27 @@
       "summary": "FAL concurrency cap is 10 across all endpoints in an account - batch-SAM with 5 concurrency leaves headroom for mask download fetches on the same CDN",
       "detail": "A SAM text-prompted pipeline that runs 30 prompts in parallel can hit concurrency limits because mask downloads from fal.media also count. Keep the SAM fan-out to ~5 so parallel mask fetches have room.",
       "addedAt": "2026-04-24"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "gemini",
+      "summary": "OpenAI Whisper API requires array notation for timestamp granularities",
+      "detail": "When requesting word-level timestamps from OpenAI Whisper via multipart/form-data, the field key MUST be \\\"timestamp_granularities[]\\\" (with brackets) rather than just \\\"timestamp_granularities\\\".",
+      "addedAt": "2026-04-27"
+    },
+    {
+      "category": "platform",
+      "cli": "gemini",
+      "summary": "OpenAI 429 error (quota exceeded) handling in video-use",
+      "detail": "The video-use plugin previously lacked OpenAI support. Adding it requires handling 429 errors gracefully or ensuring the user is aware of quota limitations.",
+      "addedAt": "2026-04-27"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "gemini",
+      "summary": "Flexible transcript resolution in video-use",
+      "detail": "The video-use renderer should try both [sourceId].json and the raw sourceId when looking for transcripts in the edit directory to accommodate both stem-based and filename-based source IDs.",
+      "addedAt": "2026-04-27"
     }
   ]
 }
