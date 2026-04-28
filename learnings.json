@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-27",
+  "updated": "2026-04-28",
   "learnings": [
     {
       "category": "cli-flags",
@@ -484,6 +484,13 @@
       "summary": "Flexible transcript resolution in video-use",
       "detail": "The video-use renderer should try both [sourceId].json and the raw sourceId when looking for transcripts in the edit directory to accommodate both stem-based and filename-based source IDs.",
       "addedAt": "2026-04-27"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "codex",
+      "summary": "GitHub Push-AndPR.ps1 and New-PullRequest.ps1 fail for repo names containing hyphens because they read the config object with $config.Repos.$Repo",
+      "detail": "When the configured repo key contains hyphens, dot-property access returns null and the scripts print Repository not found. Use indexed/property lookup that supports arbitrary keys, such as $config.Repos[$Repo] or $config.Repos.PSObject.Properties[$Repo].Value, before pushing or creating the PR.",
+      "addedAt": "2026-04-28"
     }
   ]
 }
