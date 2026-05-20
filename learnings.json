@@ -582,6 +582,13 @@
       "summary": "Builder.io examplePageUrl uses single-brace {field} substitution, not {{field}}",
       "detail": "The model.examplePageUrl placeholder substitution is single curly braces - {slug} resolves to the entry data.slug field at runtime. Double braces ({{data.slug}}) are NOT substituted and render as a literal string in the editor preview URL. Reference field paths use the top-level data field name (slug), not a dotted data.slug path.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Builder.io data-model examplePageUrl is STATIC - no placeholder substitution",
+      "detail": "Despite docs / community posts suggesting {field} or {{field}} substitution, examplePageUrl on data-kind models is a literal static URL. Neither {slug} nor {{data.slug}} are interpolated; the editor renders them URL-encoded (%7Bslug%7D). The canonical preview pattern for data models is: (1) set examplePageUrl to a static landing route; (2) Builder.io editor iframes that URL with ?builder.preview=<model>&builder.entry=<id> appended; (3) the app reads the entry id from search params and fetches by id with includeUnpublished=true. The /[slug] route can coexist for direct browsing.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
