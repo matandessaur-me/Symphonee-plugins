@@ -547,6 +547,13 @@
       "summary": "`gh` CLI is not installed by default on Windows dev boxes",
       "detail": "Running `gh api repos/...` returns \"command not found\" on Windows. Fall back to curl against the public REST API (api.github.com/repos/<owner>/<repo>) for read-only repo metadata, ls-remote for ref state, and the user's local Git credentials for authenticated git push. Recommend the user install gh via winget if PR / Actions work is expected.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "shell",
+      "cli": "claude",
+      "summary": "Frameworks with trailingSlash setting return 308 on POST without slash; curl -L required",
+      "detail": "Web frameworks that enforce canonical trailing slashes (Next, NestJS with redirects, etc.) issue 308 Permanent Redirect to the slash form. POST clients that do not follow redirects see only the redirect body. For smoke tests via curl, add -L to follow, or hit the canonical form directly. Affects every POST API smoke once the framework rewrite kicks in.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
