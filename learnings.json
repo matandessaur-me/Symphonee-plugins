@@ -554,6 +554,13 @@
       "summary": "Frameworks with trailingSlash setting return 308 on POST without slash; curl -L required",
       "detail": "Web frameworks that enforce canonical trailing slashes (Next, NestJS with redirects, etc.) issue 308 Permanent Redirect to the slash form. POST clients that do not follow redirects see only the redirect body. For smoke tests via curl, add -L to follow, or hit the canonical form directly. Affects every POST API smoke once the framework rewrite kicks in.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Symphonee ADO plugin: assignment endpoint is undocumented but works via root PATCH",
+      "detail": "State transitions go through PATCH /workitems/:id/state. Reassignment is not in the documented routes table but works as PATCH /workitems/:id with body assignedTo=<email>. Returns ok:true,id. The /assign sub-route returns a plugin-not-configured error and should not be used. Verify by re-fetching the item; the assignedTo field returns the resolved display name.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
