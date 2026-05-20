@@ -561,6 +561,20 @@
       "summary": "Symphonee ADO plugin: assignment endpoint is undocumented but works via root PATCH",
       "detail": "State transitions go through PATCH /workitems/:id/state. Reassignment is not in the documented routes table but works as PATCH /workitems/:id with body assignedTo=<email>. Returns ok:true,id. The /assign sub-route returns a plugin-not-configured error and should not be used. Verify by re-fetching the item; the assignedTo field returns the resolved display name.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Builder.io content API returns at most 100 entries per call - paginate via offset",
+      "detail": "Even when limit=500 is passed to the content v3 read API, results cap at 100 (limit=100 is the hard maximum). To get all entries for a model, paginate using &offset=N. The X-Total-Count or equivalent count is not always exposed - the right pattern is to keep fetching with offset += 100 until results is shorter than 100.",
+      "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Builder.io reference field shape - @builder.io/core:Reference",
+      "detail": "When writing entries via /api/v1/write/<model> that reference another model, the field value must be { \"@type\": \"@builder.io/core:Reference\", \"id\": \"<entry-id>\", \"model\": \"<model-name>\" }. Pass just the id string and the write succeeds but the reference does not resolve in subsequent reads. Same shape for list sub-fields that contain a reference.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
