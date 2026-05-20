@@ -533,6 +533,20 @@
       "summary": "Zod 4 returns verbose default codes for missing required fields, not refinement messages",
       "detail": "For a schema like z.string().min(1, \"required\"), an absent field returns the issue message \"Invalid input: expected string, received undefined\" (the type-mismatch default), not \"required\". The .min refinement only runs on present-but-malformed values. To get short stable codes for missing fields, define the field with a refine() or use a custom error map that maps the invalid_type code to your short code at the schema root.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "platform",
+      "cli": "claude",
+      "summary": "`next build` is silent in background mode until completion",
+      "detail": "Running `next build` via Bash run_in_background produces an empty output file for the entire build duration, then dumps all stdout at once on exit. Do not poll for partial progress - just wait for the exit notification. Build time on a fresh template install is ~12-20s; on a polished skeleton ~25-40s.",
+      "addedAt": "2026-05-20"
+    },
+    {
+      "category": "platform",
+      "cli": "claude",
+      "summary": "`gh` CLI is not installed by default on Windows dev boxes",
+      "detail": "Running `gh api repos/...` returns \"command not found\" on Windows. Fall back to curl against the public REST API (api.github.com/repos/<owner>/<repo>) for read-only repo metadata, ls-remote for ref state, and the user's local Git credentials for authenticated git push. Recommend the user install gh via winget if PR / Actions work is expected.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
