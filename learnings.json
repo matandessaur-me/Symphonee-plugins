@@ -512,6 +512,27 @@
       "summary": "Builder admin SDK typed Mutation omits locale/targeting/webhook/settings ops; fall back to raw GraphQL",
       "detail": "The admin SDK exposes only model + space + folder + asset + auth-provider mutations via createAdminApiClient. setSpaceLocales, upsertSpaceLocale, setCustomTargetingAttributes, upsertCustomTargetingAttribute, updateWebhooks, updateSpaceEditorSettings, and updatePlugins are NOT in the chain/mutation type. POST raw GraphQL to the admin endpoint with header Authorization: Bearer <privateKey>. Introspect available mutations via { __schema { mutationType { fields { name args { name } } } } }.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Builder admin GraphQL `settings` field is JSONObject! - no subselections",
+      "detail": "The admin GraphQL `settings` field on Query has type JSONObject! (untyped JSON), so `query { settings { name } }` fails with \"Field settings must not have a selection since type JSONObject! has no subfields\". Use `query { settings }` and walk the resulting JSON in code. Same applies to other JSONObject-typed fields.",
+      "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Zod 4 removed errorMap on z.literal; use { message } directly",
+      "detail": "z.literal(true, { errorMap: () => ({ message: \"x\" }) }) errors with \"Object literal may only specify known properties, and errorMap does not exist\". In Zod 4 the literal signature is z.literal(value, { message }) or z.literal(value, { error }). Use message for a static string.",
+      "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Zod 4 returns verbose default codes for missing required fields, not refinement messages",
+      "detail": "For a schema like z.string().min(1, \"required\"), an absent field returns the issue message \"Invalid input: expected string, received undefined\" (the type-mismatch default), not \"required\". The .min refinement only runs on present-but-malformed values. To get short stable codes for missing fields, define the field with a refine() or use a custom error map that maps the invalid_type code to your short code at the schema root.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
