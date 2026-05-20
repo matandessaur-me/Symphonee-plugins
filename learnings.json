@@ -596,6 +596,13 @@
       "summary": "Builder.io editor signals entry via builder.overrides.<modelName>=<id>, not builder.entry",
       "detail": "When the Builder.io editor iframes a data-model preview URL, the entry id arrives as ?builder.overrides.<modelName>=<entryId> (e.g. builder.overrides.product=xxx), and there is a duplicate ?builder.overrides.<entryId>=<entryId> param. There is no ?builder.entry=<id> for data models - that pattern is page-model behavior. Use the @builder.io/react BuilderContent component which parses these params internally and also subscribes to live editor updates via window.postMessage. The component receives the entry data on every keystroke without a save round-trip.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Builder admin upload endpoint creates CDN bytes only - asset library entry is session-only",
+      "detail": "The Bearer-PAT upload endpoint stores file bytes on the CDN and returns a working asset URL, but the corresponding library catalog entry is NOT created. The admin GraphQL assets(input) query returns 0 even after many such uploads. Multipart variants and alternate REST paths do not change this. Only the editor UI picker (session cookie auth) registers library entries. For bulk-loaded content, plan to either (a) accept orphan CDN URLs that work for display but are not browsable in the picker, or (b) leave image fields empty and have editors upload through the picker for proper library registration.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
