@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-28",
+  "updated": "2026-05-20",
   "learnings": [
     {
       "category": "cli-flags",
@@ -491,6 +491,20 @@
       "summary": "GitHub Push-AndPR.ps1 and New-PullRequest.ps1 fail for repo names containing hyphens because they read the config object with $config.Repos.$Repo",
       "detail": "When the configured repo key contains hyphens, dot-property access returns null and the scripts print Repository not found. Use indexed/property lookup that supports arbitrary keys, such as $config.Repos[$Repo] or $config.Repos.PSObject.Properties[$Repo].Value, before pushing or creating the PR.",
       "addedAt": "2026-04-28"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "ADO Task type rejects Resolved state; only User Stories allow it",
+      "detail": "Azure DevOps Agile-process Task work items have states New -> Active -> Closed (no Resolved). PATCH /api/workitems/:id/state with {state:\"Resolved\"} returns 400 \"value not in the list of supported values\" for Task type. User Story / Bug / Epic / Feature types DO support Resolved. Before resolving in bulk, check the work-item type and use Closed for Task, Resolved for User Story.",
+      "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Builder.io locale is a reserved targeting attribute - must use dedicated mutations",
+      "detail": "Calling upsertCustomTargetingAttribute with key=\"locale\" returns: \"The locale attribute cannot be modified using this endpoint. Use the dedicated locale endpoints (upsertSpaceLocale, deleteSpaceLocale, setSpaceLocales, etc.) instead.\" Use setSpaceLocales(locales: [String!]!) to replace the whole list, and upsertSpaceLocale(locale: LocaleDescriptionInput) to attach name+description. Both mutations return TargetingAttributeSchema! (not a locale object), so the selection set must be { type enum descriptions { name description } }.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
