@@ -505,6 +505,13 @@
       "summary": "Builder.io locale is a reserved targeting attribute - must use dedicated mutations",
       "detail": "Calling upsertCustomTargetingAttribute with key=\"locale\" returns: \"The locale attribute cannot be modified using this endpoint. Use the dedicated locale endpoints (upsertSpaceLocale, deleteSpaceLocale, setSpaceLocales, etc.) instead.\" Use setSpaceLocales(locales: [String!]!) to replace the whole list, and upsertSpaceLocale(locale: LocaleDescriptionInput) to attach name+description. Both mutations return TargetingAttributeSchema! (not a locale object), so the selection set must be { type enum descriptions { name description } }.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Builder admin SDK typed Mutation omits locale/targeting/webhook/settings ops; fall back to raw GraphQL",
+      "detail": "The admin SDK exposes only model + space + folder + asset + auth-provider mutations via createAdminApiClient. setSpaceLocales, upsertSpaceLocale, setCustomTargetingAttributes, upsertCustomTargetingAttribute, updateWebhooks, updateSpaceEditorSettings, and updatePlugins are NOT in the chain/mutation type. POST raw GraphQL to the admin endpoint with header Authorization: Bearer <privateKey>. Introspect available mutations via { __schema { mutationType { fields { name args { name } } } } }.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
