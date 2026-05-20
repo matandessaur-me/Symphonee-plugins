@@ -575,6 +575,13 @@
       "summary": "Builder.io reference field shape - @builder.io/core:Reference",
       "detail": "When writing entries via /api/v1/write/<model> that reference another model, the field value must be { \"@type\": \"@builder.io/core:Reference\", \"id\": \"<entry-id>\", \"model\": \"<model-name>\" }. Pass just the id string and the write succeeds but the reference does not resolve in subsequent reads. Same shape for list sub-fields that contain a reference.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Builder.io examplePageUrl uses single-brace {field} substitution, not {{field}}",
+      "detail": "The model.examplePageUrl placeholder substitution is single curly braces - {slug} resolves to the entry data.slug field at runtime. Double braces ({{data.slug}}) are NOT substituted and render as a literal string in the editor preview URL. Reference field paths use the top-level data field name (slug), not a dotted data.slug path.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
