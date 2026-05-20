@@ -610,6 +610,13 @@
       "summary": "Builder model recreation wipes examplePageUrl and other per-model settings",
       "detail": "Deleting and re-adding a model via the admin GraphQL deleteModel + addModel mutations produces a NEW model id and resets all per-model settings to defaults - examplePageUrl, helperText drift, editingUrlLogic, custom permissions. After every model recreate, re-run any setter scripts that configure those settings or the in-editor preview iframe will be blank. Safer: use updateModel(body:{id,data:{...fields}}) when only modifying field definitions; only delete+recreate when the model is being meaningfully restructured.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "shell",
+      "cli": "claude",
+      "summary": "bash + node -e arrow IIFE inside double-quoted block syntactically breaks on the final paren",
+      "detail": "When piping curl output to a node -e one-liner inside a bash for-loop with double-quoted command substitution, the closing paren of an IIFE like ()=>{...} sometimes gets eaten by the shell or interpreted as command grouping. Symptom: \"SyntaxError: missing ) after argument list\". Workaround: pipe to a small .mjs script file instead. The underlying HTTP requests still ran; only the parse step crashed - so always verify state via a separate read call rather than trusting the printed output.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
