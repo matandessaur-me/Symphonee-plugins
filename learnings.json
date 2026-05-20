@@ -589,6 +589,13 @@
       "summary": "Builder.io data-model examplePageUrl is STATIC - no placeholder substitution",
       "detail": "Despite docs / community posts suggesting {field} or {{field}} substitution, examplePageUrl on data-kind models is a literal static URL. Neither {slug} nor {{data.slug}} are interpolated; the editor renders them URL-encoded (%7Bslug%7D). The canonical preview pattern for data models is: (1) set examplePageUrl to a static landing route; (2) Builder.io editor iframes that URL with ?builder.preview=<model>&builder.entry=<id> appended; (3) the app reads the entry id from search params and fetches by id with includeUnpublished=true. The /[slug] route can coexist for direct browsing.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Builder.io editor signals entry via builder.overrides.<modelName>=<id>, not builder.entry",
+      "detail": "When the Builder.io editor iframes a data-model preview URL, the entry id arrives as ?builder.overrides.<modelName>=<entryId> (e.g. builder.overrides.product=xxx), and there is a duplicate ?builder.overrides.<entryId>=<entryId> param. There is no ?builder.entry=<id> for data models - that pattern is page-model behavior. Use the @builder.io/react BuilderContent component which parses these params internally and also subscribes to live editor updates via window.postMessage. The component receives the entry data on every keystroke without a save round-trip.",
+      "addedAt": "2026-05-20"
     }
   ]
 }
