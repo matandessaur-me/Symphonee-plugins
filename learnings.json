@@ -624,6 +624,13 @@
       "summary": "Builder.io GraphQL: createModel mutation renamed to addModel(body: JSONObject!)",
       "detail": "Builder.io admin GraphQL no longer exposes createModel/CreateModelInput; use addModel(body: JSONObject!) with the same shape {name, kind, fields}. updateModel/deleteModel are unchanged. Verify via { __schema { mutationType { fields { name } } } } against the admin endpoint.",
       "addedAt": "2026-05-21"
+    },
+    {
+      "category": "shell",
+      "cli": "claude",
+      "summary": "From bash tool, never put unescaped $ in a powershell.exe -Command string - bash expands $var to empty before PowerShell sees it.",
+      "detail": "Failure mode: bash double-quoted strings interpolate $var. Running\n  powershell.exe -Command \"$b = Invoke-RestMethod ...; @{ x = $b.checksum }\"\ncauses bash to strip every $b, so PowerShell receives\n   = Invoke-RestMethod ...; @{ x = .checksum }\nand errors with: \"=: The term = is not recognized\" / \".checksum: The term .checksum is not recognized\".\nEven $var inside a JSON body passed as -d '...' is unsafe when the outer -Command \"...\" is bash-double-quoted, because bash interpolates the entire argument before quoting layers inside it matter.\n\nFixes (in order of preference):\n  (1) Write the PowerShell code to .ai-workspace/x.ps1 and run\n        powershell.exe -ExecutionPolicy Bypass -NoProfile -File ./.ai-workspace/x.ps1\n  (2) Escape every $ as \\$ inside the bash double-quoted -Command argument.\n  (3) Use the PowerShell tool directly instead of the bash tool.\n\nSingle-line one-shots with no $variables (e.g. Invoke-RestMethod URL | ConvertTo-Json) are safe.",
+      "addedAt": "2026-05-21"
     }
   ]
 }
