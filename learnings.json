@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-20",
+  "updated": "2026-05-21",
   "learnings": [
     {
       "category": "cli-flags",
@@ -617,6 +617,13 @@
       "summary": "bash + node -e arrow IIFE inside double-quoted block syntactically breaks on the final paren",
       "detail": "When piping curl output to a node -e one-liner inside a bash for-loop with double-quoted command substitution, the closing paren of an IIFE like ()=>{...} sometimes gets eaten by the shell or interpreted as command grouping. Symptom: \"SyntaxError: missing ) after argument list\". Workaround: pipe to a small .mjs script file instead. The underlying HTTP requests still ran; only the parse step crashed - so always verify state via a separate read call rather than trusting the printed output.",
       "addedAt": "2026-05-20"
+    },
+    {
+      "category": "api-pattern",
+      "cli": null,
+      "summary": "Builder.io GraphQL: createModel mutation renamed to addModel(body: JSONObject!)",
+      "detail": "Builder.io admin GraphQL no longer exposes createModel/CreateModelInput; use addModel(body: JSONObject!) with the same shape {name, kind, fields}. updateModel/deleteModel are unchanged. Verify via { __schema { mutationType { fields { name } } } } against the admin endpoint.",
+      "addedAt": "2026-05-21"
     }
   ]
 }
