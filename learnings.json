@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-21",
+  "updated": "2026-05-25",
   "learnings": [
     {
       "category": "cli-flags",
@@ -631,6 +631,13 @@
       "summary": "From bash tool, never put unescaped $ in a powershell.exe -Command string - bash expands $var to empty before PowerShell sees it.",
       "detail": "Failure mode: bash double-quoted strings interpolate $var. Running\n  powershell.exe -Command \"$b = Invoke-RestMethod ...; @{ x = $b.checksum }\"\ncauses bash to strip every $b, so PowerShell receives\n   = Invoke-RestMethod ...; @{ x = .checksum }\nand errors with: \"=: The term = is not recognized\" / \".checksum: The term .checksum is not recognized\".\nEven $var inside a JSON body passed as -d '...' is unsafe when the outer -Command \"...\" is bash-double-quoted, because bash interpolates the entire argument before quoting layers inside it matter.\n\nFixes (in order of preference):\n  (1) Write the PowerShell code to .ai-workspace/x.ps1 and run\n        powershell.exe -ExecutionPolicy Bypass -NoProfile -File ./.ai-workspace/x.ps1\n  (2) Escape every $ as \\$ inside the bash double-quoted -Command argument.\n  (3) Use the PowerShell tool directly instead of the bash tool.\n\nSingle-line one-shots with no $variables (e.g. Invoke-RestMethod URL | ConvertTo-Json) are safe.",
       "addedAt": "2026-05-21"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "Push-AndPR.ps1 and New-PullRequest.ps1 read repos from wrong endpoint",
+      "detail": "Both scripts in dashboard/plugins/github/scripts/ read $config.Repos.$Repo from /api/config, but configured repos actually live at /api/repos (returns flat name->path dict). Result: every call dies with \"Repository not found\" before pushing. Workaround: push manually with git push -u origin <branch> then POST to /api/pull-request with body {repoName, title, description, sourceBranch, targetBranch, workItemId?}. Real fix: patch the two scripts to use Invoke-RestMethod http://127.0.0.1:3800/api/repos and index by name.",
+      "addedAt": "2026-05-25"
     }
   ]
 }
