@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-25",
+  "updated": "2026-05-26",
   "learnings": [
     {
       "category": "cli-flags",
@@ -638,6 +638,13 @@
       "summary": "Push-AndPR.ps1 and New-PullRequest.ps1 read repos from wrong endpoint",
       "detail": "Both scripts in dashboard/plugins/github/scripts/ read $config.Repos.$Repo from /api/config, but configured repos actually live at /api/repos (returns flat name->path dict). Result: every call dies with \"Repository not found\" before pushing. Workaround: push manually with git push -u origin <branch> then POST to /api/pull-request with body {repoName, title, description, sourceBranch, targetBranch, workItemId?}. Real fix: patch the two scripts to use Invoke-RestMethod http://127.0.0.1:3800/api/repos and index by name.",
       "addedAt": "2026-05-25"
+    },
+    {
+      "category": "orchestration",
+      "cli": "codex",
+      "summary": "Codex spawn returns quota-exceeded immediately when OpenAI account is out of credits",
+      "detail": "errorClassification.failoverReason = out of credits / quota. CLI prints ERROR: Quota exceeded then exits. Not retryable. Failover to another CLI (Claude/Gemini/Grok) or have the user top up. Detected via task.error containing Quota exceeded substring.",
+      "addedAt": "2026-05-26"
     }
   ]
 }
