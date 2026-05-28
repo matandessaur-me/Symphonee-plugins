@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updated": "2026-04-19",
+  "updated": "2026-05-28",
   "plugins": [
     {
       "id": "azure-devops",
@@ -221,7 +221,7 @@
       "name": "Wrike",
       "description": "Task management, board view, cross-sync with Azure DevOps",
       "author": "M8N-MatanDessaur",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "icon": "check-square",
       "tint": "100, 200, 120",
       "repo": "https://github.com/M8N-MatanDessaur/symphonee-plugin-wrike",
