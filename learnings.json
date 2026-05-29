@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-26",
+  "updated": "2026-05-29",
   "learnings": [
     {
       "category": "cli-flags",
@@ -645,6 +645,13 @@
       "summary": "Codex spawn returns quota-exceeded immediately when OpenAI account is out of credits",
       "detail": "errorClassification.failoverReason = out of credits / quota. CLI prints ERROR: Quota exceeded then exits. Not retryable. Failover to another CLI (Claude/Gemini/Grok) or have the user top up. Detected via task.error containing Quota exceeded substring.",
       "addedAt": "2026-05-26"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "ADO work-item parent/child nesting: the create/update REST routes only set fields, not hierarchy. To nest, PATCH the CHILD with op add /relations/- value { rel: 'System.LinkTypes.Hierarchy-Reverse', url: <parent workItems url> } via the Azure DevOps REST API (api-version=7.1, content-type application/json-patch+json).",
+      "detail": "Plugin create routes that wrap workitems cannot link parents. Read the PAT from the plugin config and call dev.azure.com directly for the relation. Also: an iteration node must already exist before assigning System.IterationPath or ADO returns TF401347.",
+      "addedAt": "2026-05-29"
     }
   ]
 }
