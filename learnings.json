@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-29",
+  "updated": "2026-06-05",
   "learnings": [
     {
       "category": "cli-flags",
@@ -652,6 +652,13 @@
       "summary": "ADO work-item parent/child nesting: the create/update REST routes only set fields, not hierarchy. To nest, PATCH the CHILD with op add /relations/- value { rel: 'System.LinkTypes.Hierarchy-Reverse', url: <parent workItems url> } via the Azure DevOps REST API (api-version=7.1, content-type application/json-patch+json).",
       "detail": "Plugin create routes that wrap workitems cannot link parents. Read the PAT from the plugin config and call dev.azure.com directly for the relation. Also: an iteration node must already exist before assigning System.IterationPath or ADO returns TF401347.",
       "addedAt": "2026-05-29"
+    },
+    {
+      "category": "shell",
+      "cli": "claude",
+      "summary": "git add fails the whole staging if any pathspec was already git-rm'd",
+      "detail": "Passing an already-removed file path to git add (e.g. after git rm) errors with fatal: pathspec did not match, and stages NONE of the other listed files. Stage edited files separately from rm'd ones, or add by directory.",
+      "addedAt": "2026-06-05"
     }
   ]
 }
