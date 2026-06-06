@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-06-05",
+  "updated": "2026-06-06",
   "learnings": [
     {
       "category": "cli-flags",
@@ -659,6 +659,13 @@
       "summary": "git add fails the whole staging if any pathspec was already git-rm'd",
       "detail": "Passing an already-removed file path to git add (e.g. after git rm) errors with fatal: pathspec did not match, and stages NONE of the other listed files. Stage edited files separately from rm'd ones, or add by directory.",
       "addedAt": "2026-06-05"
+    },
+    {
+      "category": "platform",
+      "cli": "gemini",
+      "summary": "Workspace restrictions on high-level tools",
+      "detail": "High-level tools like list_directory, read_file, and write_file are restricted to the launch workspace (Project Neo). For multi-repo tasks in Symphonee, use run_shell_command with absolute paths or Set-Location to interact with other repositories (like DYOB3).",
+      "addedAt": "2026-06-06"
     }
   ]
 }
