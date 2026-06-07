@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-06-06",
+  "updated": "2026-06-07",
   "learnings": [
     {
       "category": "cli-flags",
@@ -666,6 +666,13 @@
       "summary": "Workspace restrictions on high-level tools",
       "detail": "High-level tools like list_directory, read_file, and write_file are restricted to the launch workspace (Project Neo). For multi-repo tasks in Symphonee, use run_shell_command with absolute paths or Set-Location to interact with other repositories (like DYOB3).",
       "addedAt": "2026-06-06"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "When moving a module into a subdirectory, audit every require('./x') and __dirname-relative path - they silently resolve to the wrong place; and route-handler ReferenceErrors are invisible to a require()/load-check, only surfacing when the route is actually called (the request just hangs with no response).",
+      "detail": "A route-registration module was extracted into a subdir; a helper it called was left in the parent and never imported, so the call threw ReferenceError inside an async handler -> the HTTP request hung with no response and no error in logs. Load-check passed because the handler is only invoked at request time. Also an inline require('./permissions') + path.resolve(__dirname,'..') for a config path both shifted by one directory and silently fell into a catch. Fix: thread the needed root/dep in via the function signature instead of __dirname; add a test that INVOKES the handler (not just registers it).",
+      "addedAt": "2026-06-07"
     }
   ]
 }
