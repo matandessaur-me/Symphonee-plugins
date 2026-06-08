@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updated": "2026-05-28",
+  "updated": "2026-06-08",
   "plugins": [
     {
       "id": "azure-devops",
@@ -40,7 +40,7 @@
       "name": "Builder.io",
       "description": "Manage Builder.io models, schemas, and content entries with AI-powered actions",
       "author": "M8N-MatanDessaur",
-      "version": "2.8.0",
+      "version": "2.8.1",
       "icon": "blocks",
       "tint": "160, 120, 210",
       "repo": "https://github.com/M8N-MatanDessaur/symphonee-plugin-builderio",
@@ -144,7 +144,7 @@
       "name": "Sanity",
       "description": "Manage Sanity.io datasets, document types, and documents with AI-powered actions",
       "author": "M8N-MatanDessaur",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "icon": "database",
       "tint": "242, 77, 52",
       "repo": "https://github.com/M8N-MatanDessaur/symphonee-plugin-sanity",
@@ -179,7 +179,7 @@
       "name": "WordPress",
       "description": "Manage WordPress sites via the REST API -- create and edit posts, pages, media, categories, comments, users, and SEO metadata (Yoast / RankMath)",
       "author": "M8N-MatanDessaur",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "icon": "feather",
       "tint": "33, 117, 155",
       "repo": "https://github.com/M8N-MatanDessaur/symphonee-plugin-wordpress",
