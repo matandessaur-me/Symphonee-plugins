@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-06-07",
+  "updated": "2026-09-07",
   "learnings": [
     {
       "category": "cli-flags",
@@ -680,6 +680,34 @@
       "summary": "Rate limit hit mid-task. Reduce steps: prefer direct URL navigation over multi-step UI clicks. Use Haiku model for browser tasks.",
       "detail": null,
       "addedAt": "2026-06-07"
+    },
+    {
+      "category": "general",
+      "cli": "tester",
+      "summary": "A change regressed: claim on test.txt",
+      "detail": "Claimed by tester on 2026-09-07 (test.txt). Checked 2026-09-07: Test failed (1): exit 1.",
+      "addedAt": "2026-09-07"
+    },
+    {
+      "category": "general",
+      "cli": "tester",
+      "summary": "A change was reverted: claim on revert.txt",
+      "detail": "Claimed by tester on 2026-09-07 (revert.txt). Checked 2026-09-07: revert.txt: revert commit a772074|t|Revert \"edit revert\".",
+      "addedAt": "2026-09-07"
+    },
+    {
+      "category": "general",
+      "cli": "tester",
+      "summary": "A change was reverted: claim on hand.txt",
+      "detail": "Claimed by tester on 2026-09-07 (hand.txt). Checked 2026-09-07: hand.txt: revert commit a772074|t|Revert \"edit revert\".",
+      "addedAt": "2026-09-07"
+    },
+    {
+      "category": "general",
+      "cli": "tester",
+      "summary": "A change was reverted: claim on gone.txt",
+      "detail": "Claimed by tester on 2026-09-07 (gone.txt). Checked 2026-09-07: gone.txt no longer exists.",
+      "addedAt": "2026-09-07"
     }
   ]
 }
