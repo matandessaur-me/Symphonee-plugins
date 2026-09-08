@@ -729,6 +729,13 @@
       "summary": "Netlify Functions with the Lambda-compatible handler must call connectLambda(event) from @netlify/blobs before getStore, or Blobs is unavailable in production. Also Netlify blocks builds of Next.js versions affected by CVE-2025-55182; upgrade Next before deploying.",
       "detail": null,
       "addedAt": "2026-09-08"
+    },
+    {
+      "category": "api-pattern",
+      "cli": "claude",
+      "summary": "scripts/save-note.js hardcodes port 3800, so on a server running on another port it fails with Missing or invalid API token. Post to $SYMPHONEE_API/api/notes/save with {name, content} and the x-symphonee-token header instead until the script reads SYMPHONEE_API.",
+      "detail": null,
+      "addedAt": "2026-09-08"
     }
   ]
 }
