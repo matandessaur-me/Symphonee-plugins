@@ -736,6 +736,13 @@
       "summary": "scripts/save-note.js hardcodes port 3800, so on a server running on another port it fails with Missing or invalid API token. Post to $SYMPHONEE_API/api/notes/save with {name, content} and the x-symphonee-token header instead until the script reads SYMPHONEE_API.",
       "detail": null,
       "addedAt": "2026-09-08"
+    },
+    {
+      "category": "general",
+      "cli": "claude",
+      "summary": "Launched headless Chrome (CDP) for phone-width screenshots instead of the in-app browser; Chrome windows popped up outside the app. Use POST /api/browser/emulate/device {width,height} then GET /api/browser/screenshot. Never start a browser of your own (absolute rule 10).",
+      "detail": null,
+      "addedAt": "2026-09-08"
     }
   ]
 }
