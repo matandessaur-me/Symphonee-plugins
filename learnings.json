@@ -715,6 +715,13 @@
       "summary": "JS new Date(\"YYYY-MM-DD\") is UTC midnight but new Date(\"YYYY-MM-DDTHH:MM\") is local time; mixing them shifts day boundaries by one day west of UTC",
       "detail": "Parse calendar days with new Date(y, m-1, d) when comparing against local wall-clock times.",
       "addedAt": "2026-09-08"
+    },
+    {
+      "category": "platform",
+      "cli": "claude",
+      "summary": "Never run next build while next dev is running in the same Next.js project: both write to .next and the dev server breaks (500s, missing CSS, webpack cache rename errors). Stop the dev server first, or verify with the dev server alone.",
+      "detail": "Observed with Next 15 behind netlify dev. After next build the running dev server served unstyled HTML and GET / 500. Fix was to stop it, delete .next, and start it again.",
+      "addedAt": "2026-09-08"
     }
   ]
 }
